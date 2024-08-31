@@ -1,0 +1,33 @@
+@import "../../utils/include_init.wxss";
+
+/* 假设你的页面高度不是固定的，可以使用以下样式 */
+
+/* 设置页面容器使用 flex 布局，沿垂直方向排列子元素 */
+.page-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* 设置容器高度为页面高度 */
+  }
+  
+  /* 主要内容部分占满剩余空间 */
+  .main-content {
+    flex: 1;
+    /* 其他主要内容样式 */
+  }
+  
+/* 底部按钮部分 */
+.bottom-button {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: #ffffff; /* 文字颜色 */
+    text-align: center;
+    border: none; /* 去掉按钮边框 */
+    font-size: 16px; /* 文字大小 */
+    font-weight: bold; /* 文字加粗 */
+    cursor: pointer; /* 鼠标指针样式为手型 */
+  }
+  
+  
+  

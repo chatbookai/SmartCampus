@@ -1,0 +1,79 @@
+<!--新闻 通知 两种模板的查看显示-->
+<view style="padding-bottom: 61px;" wx:if="{{pageActionView==true && (pageActionViewType=='Schoolmate')}}">
+    <view>
+        <image src="/images/220140.jpg" class="Schoolmate-bg"></image>
+    </view>
+    <image src="/images/xiaoyou/share-icon.png" class="Schoolmate-share-icon"></image>
+    <view class="Schoolmate-content">
+        <view class="Schoolmate-mode1">
+        <view class="Schoolmate-touxiang-info">
+            <view class="Schoolmate-head-box">
+            <image src="{{setData['MobileEndNewsTopAvator']}}"></image>
+            </view>
+            <view class="user-type">{{data['校友身份']}}</view>
+        </view>
+        <view class="Schoolmate-cont">
+            <view class="Schoolmate-card">
+            <view class="Schoolmate-change-card">
+                <text>+</text>
+                <text>交换名片</text>
+            </view>
+            </view>
+            <view class="Schoolmate-name-active">
+            <view class="nickname">{{setData['MobileEndNewsCreator']}}</view>
+            <view class="active">{{setData['MobileEndSchoolmateLastActivity']}}</view>
+            </view>
+            <view class="Schoolmate-speciality-education">
+            <view class="speciality">{{setData['MobileEndNewsCreatorGroup']}}</view>
+            <view class="time">（{{setData['MobileEndSchoolmateFirstYear']}}-{{setData['MobileEndSchoolmateLastYear']}}）</view>
+            <view class="education">{{setData['MobileEndSchoolmateAcademic']}}</view>
+            </view>
+            <view class="focus-access" wx:if="{{false}}">
+                <view class="focus">0 关注</view>
+                <view class="access">0 来访</view>
+            </view>
+        </view>
+        </view>
+        <view class="Schoolmate-mode2">
+        <view class="item">
+            <view class="title">所在城市</view>
+            <view class="val">{{setData['MobileEndSchoolmateCity']}}</view>
+        </view>
+        <view class="item">
+            <view class="title">当前行业</view>
+            <view class="val">{{setData['MobileEndSchoolmateIndustry']}}</view>
+        </view>
+        <view class="item">
+            <view class="title">工作单位</view>
+            <view class="val">{{setData['MobileEndSchoolmateCompany']}}</view>
+        </view>
+        <view class="item">
+            <view class="title">当前职位</view>
+            <view class="val">{{data['当前职位']}}</view>
+        </view>
+        <view class="item">
+            <view class="title">单位介绍</view>
+            <view class="val">{{data['单位介绍']}}</view>
+        </view>
+        </view>
+        <view class="Schoolmate-mode3" wx:if="{{false}}">
+            <view class="title">交换名片后可查看联系方式</view>
+            <view class="btn">
+                <text class="icon">+</text>
+                <text>马上交换名片</text>
+            </view>
+        </view>
+        <view class="Schoolmate-mode4">
+            <view class="title">自我介绍</view>
+            <view class="val">{{data['自我介绍']}}</view>
+        </view>
+        <view class="Schoolmate-mode5">
+            <view class="title">提供资源</view>
+            <view class="val">{{data['我能提供的资源']}}</view>
+        </view>
+        <view class="Schoolmate-mode6">
+        <view class="title">我的需求</view>
+        <view class="val">{{data['我的需求']}}</view>
+        </view>
+    </view>
+</view>

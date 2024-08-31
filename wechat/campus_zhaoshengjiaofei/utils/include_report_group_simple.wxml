@@ -1,0 +1,37 @@
+<!--通知的列表显示,纯文件列表显示,不带图片的预览--> 
+<view class="container_group_simple"  style="{{IsShowBackGroundColor ? 'background:#EEE' : '' }}" wx:if="{{pageActionInit==true && pageActionInitNewsOrNotify=='简单分组'}}">
+  
+  <include src="include_report_formsearch.wxml" />
+
+	<view class="container_group_simple_itembox {{FieldNumber}}">
+		<block wx:for="{{FieldList}}" wx:key="index">
+			<view class="item{{FieldList.length}}" wx:if="{{FieldList[index]!='链接'}}">{{item}}</view>
+		</block>
+	</view>
+	<block wx:for="{{Records}}" wx:key="index">
+		<view class="container_group_simple_itembox {{FieldNumber}}">
+			<view class="container_group_simple_item">
+				<view>{{item[FieldList[0]]}}</view>
+			</view>
+			<view class="item{{FieldList.length}}">{{item[FieldList[1]]}}</view>
+			<view class="item{{FieldList.length}} {{item[FieldList[2]]=='详情'?'detail':''}}" wx:if="{{item[FieldList[2]]&&FieldList[2]!='链接'}}">{{item[FieldList[2]]}}</view>
+			<view class="item{{FieldList.length}} {{item[FieldList[3]]=='详情'?'detail':''}}" wx:if="{{item[FieldList[3]]&&FieldList[3]!='链接'}}">{{item[FieldList[3]]}}</view>
+			<view class="item{{FieldList.length}} {{item[FieldList[4]]=='详情'?'detail':''}}" wx:if="{{item[FieldList[4]]&&FieldList[4]!='链接'}}" style="  white-space:nowrap;">
+          {{item[FieldList[4]]}}
+      </view>
+			<view class="item{{FieldList.length}} {{item[FieldList[4]]=='详情'?'detail':''}}" wx:if="{{item[FieldList[4]]&&FieldList[4]=='链接'}}" style="  white-space:nowrap;">
+        <navigator url="/pages/{{tempateType}}/{{tempateId}}{{item['链接']}}" hover-class="none">
+          {{item[FieldList[4]]}}
+        </navigator>  
+      </view>
+      <view class="item{{FieldList.length}} {{item[FieldList[5]]=='详情'?'detail':''}}" wx:if="{{item[FieldList[5]]&&FieldList[5]!='链接'}}" style="  white-space:nowrap;">
+          {{item[FieldList[5]]}}
+      </view>
+      <view class="item{{FieldList.length}} {{item[FieldList[5]]=='详情'?'detail':''}}" wx:if="{{item[FieldList[5]]&&FieldList[5]=='链接'}}" style="  white-space:nowrap;">
+        <navigator url="/pages/{{tempateType}}/{{tempateId}}{{item['链接']}}" hover-class="none">
+          {{item[FieldList[5]]}}
+        </navigator>  
+      </view>
+		</view>
+	</block>
+</view>

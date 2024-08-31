@@ -1,0 +1,36 @@
+
+.container{
+  background: #fff;
+}
+.container .cont{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 200rpx;
+}
+.container .cont .img{
+  width: 420rpx;
+  height: 260rpx;
+  margin-bottom: 30rpx;
+}
+.container .cont image{
+  width: 420rpx;
+  height: 260rpx;
+}
+.container .cont view{
+  font-size: 30rpx;
+  color: #999;
+}
+.container .btn{
+  position: fixed;
+  bottom: 100rpx;
+  left: 50rpx;
+  width: 650rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  border-radius: 20rpx;
+  color: #fff;
+  background-image: linear-gradient(120deg, #46eeeb 20%, #17c3c9 80%);
+  margin: 0 auto;
+}

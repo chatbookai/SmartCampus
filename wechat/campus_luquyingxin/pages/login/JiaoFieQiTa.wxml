@@ -1,0 +1,40 @@
+<view>
+  <view class="user-info" wx:if="{{Infor['姓名']!=''}}">
+    <image src="{{avatarUrl}}"></image>
+    <view class="nickname-class">
+      <view class="nickname">{{Infor['姓名']}}</view>
+      <view class="class">{{Infor['显示信息']}}</view>
+    </view>
+  </view>
+  <view class="list">
+    <block wx:for="{{list}}" wx:key="itemIndex" wx:for-item="item" wx:for-index="index1">
+      <block wx:for="{{item['每个学期应缴费']}}" wx:key="subItemIndex" wx:for-item="subItem" wx:for-index="index2">
+      <view class="item">
+        <view class="title">{{item['学期名称']}}</view>
+        <view class="sub-list">
+            <view class="sub-item">
+              <view class="left">
+                <view class="name">{{subItem['名称']}}<block wx:if="{{subItem['名称']=='学费'}}">{{subItem['学费折扣']}}</block></view>
+                <view class="payable">应缴：{{subItem['应缴']}}</view>
+                <view class="paid">已缴：{{subItem['已缴']}}</view>
+              </view>
+              <view class="surplus" wx:if="{{subItem['欠费']>0 && subItem['只读']!='是'&&subItem['是否启用']=='是'}}"><text>￥</text><input type="digit" value="{{subItem['计划缴费']}}" bindinput="修改缴费金额后重新计算总缴费" data-id="{{item['编号']}}" data-subid="{{subItem['编号']}}" max="{{subItem['欠费']}}" min="0"/></view>
+              <view class="surplus" wx:if="{{subItem['欠费']>0 && subItem['只读']=='是'&&subItem['是否启用']=='是'}}"><text>￥</text>{{subItem['欠费']}}<input type="hidden" value="{{subItem['计划缴费']}}" data-id="{{item['编号']}}" data-subid="{{subItem['编号']}}" max="{{subItem['欠费']}}" min="0" style="width:0rpx;" hidden="true"/></view>
+              <view class="surplus" wx:if="{{subItem['是否启用']=='否'}}">{{subItem['未启用时文本描述']}}<input type="hidden" value="{{subItem['计划缴费']}}" data-id="{{item['编号']}}" data-subid="{{subItem['编号']}}" max="{{subItem['欠费']}}" min="0" style="width:0rpx;" hidden="true"/></view>
+              <view class="surplus" wx:if="{{subItem['欠费']==0&&subItem['是否启用']=='是'}}">{{subItem['已结清文本']}}</view>
+            </view>
+        </view>
+        <view class="totle-box" wx:if="{{subItem['欠费']>0}}">
+          <view class="totle-surplus">本次缴费:{{subItem['欠费']}} (自愿参加,非强制性缴费)</view>
+        </view>
+        <view class="totle-box" wx:if="{{item['学期欠费合计']==0}}">
+          <view class="totle-payable">该学期费用已经结清.</view>
+        </view>
+        <view class="btn-box">
+          <view class="btn confirm" wx:if="{{subItem['欠费']>0}}" disabled="{{item['isFormSubmitButtonDisabled']}}" formType="submit" id="{{item['学期名称']}}"  bindtap="确认缴费操作" data-subItem="{{subItem}}" data-list="{{list}}" data-item="{{item}}" data-index="{{index1}}" data-triptitle="{{item['缴费提示标题']}}" data-tripcontent="{{item['缴费提示内容']}}" data-moneyamount="{{subItem['欠费']}}" data-moneyname="{{subItem['名称']}}">确认缴费</view>
+        </view>
+      </view>
+     </block>
+    </block>
+  </view>
+</view>

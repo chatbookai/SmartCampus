@@ -1,0 +1,6 @@
+<!--通知的列表显示,纯文件列表显示,不带图片的预览--> 
+<view class="move-container"  style="{{IsShowBackGroundColor ? 'background:#EEE' : '' }}" wx:if="{{pageActionInit==true && pageActionInitNewsOrNotify=='报表图表'}}">
+  <block wx:for="{{EcChartFunction}}" wx:key="F" wx:for-item="item">
+    <ec-canvas id="mychart-dom-move-line" canvas-id="mychart-move-line" ec="{{ item }}"></ec-canvas>
+  </block>
+</view>

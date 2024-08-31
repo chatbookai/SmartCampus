@@ -1,0 +1,54 @@
+<!--pages/user/user.wxml-->
+
+<view class="page">
+  <view class="userinfo section">
+    <view class="user">
+      <image class="userinfo-avatar fl_l" src="{{avatarUrl}}"></image>
+      <text class="fl_l">{{nickName}}</text>
+    </view>
+  </view>
+  <view style="margin-bottom:20rpx;">
+    <block wx:for-items="{{LOGIN_USER_PROFILE}}" wx:key="item">
+      <view class="section">
+        <view>{{item['左边']}}</view>
+        <view>{{item['右边']}}</view>
+      </view>
+    </block>
+    <view class="section">
+      <view>版本号</view>
+      <view>{{VERSION}}</view>
+    </view>
+  </view>
+  <view style="margin-bottom:20rpx;">
+  <!--
+    <view class="elementsection section" bindtap="我的小程序二维码" data-id="我的小程序二维码">
+      <view>我的小程序二维码</view>
+      <view>
+        <image src="/images/icon_next.png"></image>
+      </view>
+    </view>
+    -->
+
+    <view class="elementsection section" bindtap="查看HTML文本" data-id="小程序使用协议">
+      <view>用户使用协议</view>
+      <view>
+        <image src="/images/icon_next.png"></image>
+      </view>
+    </view>
+
+    <view class="elementsection section" bindtap="查看HTML文本" data-id="小程序首页面介绍">
+      <view>首页面介绍</view>
+      <view>
+        <image src="/images/icon_next.png"></image>
+      </view>
+    </view>
+  </view>
+
+  <view class="section">
+    <form bindsubmit="注销登录" bindreset="formReset">
+      <button form-type='submit' class="button" disabled="{{isFormSubmitButtonDisabled}}">
+        {{isFormSubmitButtonValue}}
+      </button>
+    </form>
+  </view>
+</view>

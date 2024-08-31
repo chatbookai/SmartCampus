@@ -1,0 +1,9 @@
+<view class="container">
+  <view class="cont">
+    <view class="img">
+      <image src="../../images/no-data.png"></image>
+    </view>
+    <view>当前页面没有数据，请点击下面按钮返回</view>
+  </view>
+  <view class="btn" bindtap="goBack">返回</view>
+</view>

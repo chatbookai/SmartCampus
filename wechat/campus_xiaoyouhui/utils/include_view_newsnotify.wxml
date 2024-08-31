@@ -1,0 +1,12 @@
+<!--新闻 通知 两种模板的查看显示-->
+<view class="NewViewContainer" style="height:100%;" wx:if="{{pageActionView==true && (pageActionViewType=='NewsTemplate1' || pageActionViewType=='NotificationTemplate1' || pageActionViewType=='NotificationTemplate2' )}}">
+    <view class='NewViewContainer'>
+        <view class='news-article'>
+            <view class='newstt'>{{setData['MobileEndNewsTitle']}}</view>
+            <view class='newstime' style="display:flex;justify-content:space-between;"><view>{{setData['MobileEndNewsCreator']}}</view><view>{{setData['MobileEndNewsGroup']}} {{setData['MobileEndNewsCreateTime']}}</view></view>
+            <view class='wxParse' style="margin:0;">
+            <rich-text nodes="{{setData['MobileEndNewsContent']}}" space="emsp" style="text-align: justify;"></rich-text>
+            </view>
+        </view>
+    </view>
+</view>

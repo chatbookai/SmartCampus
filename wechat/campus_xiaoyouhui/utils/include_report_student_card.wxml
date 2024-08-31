@@ -1,0 +1,32 @@
+<!--通知的列表显示,纯文件列表显示,不带MobileEndNewsLeftImage的预览--> 
+<view class="container"  style="{{IsShowBackGroundColor ? 'background:#EEE' : '' }}" wx:if="{{pageActionInit==true && pageActionInitType=='学生卡片'}}">
+  
+  <include src="include_report_formsearch.wxml" />
+  
+  <block wx:for="{{Records}}" wx:key="index">
+    <view class="container_group_student_card">
+      <view class="contenTop">
+        <text class="name">{{item['姓名']}}</text>
+        <text class="classnum">{{item['班级']}} {{item['学号']}}</text>
+      </view>
+      <view class="contentBottom">
+        <view class="left">
+          <view class="image">
+            <image src="{{item['头像']}}"></image>
+          </view>
+          <view class="appraiseContent">
+            <view class="appraiseProject">{{item['MobileEndFirstLine']}}</view>
+            <view class="appraisePerson">{{item['第二行']}}</view>
+          </view>
+        </view>
+        <view class="proofBox">
+          <text class="proofNum">{{item['右侧数字']}}</text>
+          <navigator url="/pages/{{tempateType}}/{{tempateId}}{{item['内容项URL']}}" hover-class="none">
+            <text class="lookProof">{{item['右侧文本']}}</text>
+          </navigator>
+        </view>
+      </view>
+    </view>
+  </block>
+
+</view>

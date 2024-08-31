@@ -1,0 +1,110 @@
+{
+  "pages": [ 
+    "pages/MainData/index",  
+    "pages/login/userprofile",
+    "pages/Page/Schoolmate",
+    "pages/Page/SchoolmateView",
+    "pages/Page/Cooperation",
+    "pages/Page/CooperationView",
+    "pages/Page/XiaoYouHui",
+    "pages/Page/Activity",
+    "pages/Page/ZiXun",
+    "pages/Page/ZhuanYe",
+    "pages/login/JiaoFieQiTa",
+    "pages/login/JiaoFei",
+    "pages/login/weixiaologin",
+    "pages/login/JumpToMultiChoice",
+    "pages/login/NoDataTrip",
+    "pages/login/webview",
+    "pages/login/wechatlogin",
+    "pages/login/logincheck",
+    "pages/login/htmlview",
+    "pages/InterfaceInit/0", 
+    "pages/InterfaceInit/1",
+    "pages/InterfaceInit/2",
+    "pages/InterfaceInit/3",
+    "pages/InterfaceInit/4",
+    "pages/InterfaceInit/5",
+    "pages/InterfaceInit/6",
+    "pages/InterfaceInit/7",
+    "pages/InterfaceInit/8",
+    "pages/InterfaceInit/9",
+    "pages/InterfaceInit/10",
+    "pages/InterfaceInit/11",
+    "pages/InterfaceInit/12",
+    "pages/InterfaceInit/13",
+    "pages/InterfaceInit/14",
+    "pages/InterfaceInit/15",
+    "pages/InterfaceInit/16",
+    "pages/InterfaceInit/17",
+    "pages/InterfaceInit/18",
+    "pages/InterfaceInit/19",
+    "pages/InterfaceInit/20",
+    "pages/InterfaceInit/21",
+    "pages/InterfaceInit/22",
+    "pages/InterfaceInit/23",
+    "pages/InterfaceInit/24",
+    "pages/InterfaceInit/25",
+    "pages/InterfaceInit/26",
+    "pages/InterfaceInit/27",
+    "pages/InterfaceInit/28",
+    "pages/InterfaceInit/29",
+    "pages/InterfaceInit/30",
+    "pages/Page/ZhuanYeView",
+    "pages/Page/Notify",
+    "pages/Page/News",
+    "pages/Page/NewsView",
+    "pages/Page/ActivityView",
+    "pages/Page/ZiXunView"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#17c3c9",
+    "navigationBarTitleText": "校友服务平台",
+    "navigationBarTextStyle": "white"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息将用于地理信息位置考勤."
+    }
+  },
+  "tabBar": {
+    "color": "#cdcdcd",
+    "selectedColor": "#1E95FB",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/Page/Schoolmate",
+        "iconPath": "/images/Notify.png",
+        "selectedIconPath": "/images/Notify_on.png",
+        "text": "校友"
+      },
+      {
+        "pagePath": "pages/Page/XiaoYouHui",
+        "iconPath": "/images/News.png",
+        "selectedIconPath": "/images/News_on.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/Page/Cooperation",
+        "iconPath": "/images/Campus.png",
+        "selectedIconPath": "/images/Campus_on.png",
+        "text": "互助"
+      },
+      {
+        "pagePath": "pages/Page/Activity",
+        "iconPath": "/images/News.png",
+        "selectedIconPath": "/images/News_on.png",
+        "text": "活动"
+      },
+      {
+        "pagePath": "pages/MainData/index",
+        "iconPath": "/images/Campus.png",
+        "selectedIconPath": "/images/Campus_on.png",
+        "text": "个人中心"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,16 @@
+<!--新闻 通知 两种模板的查看显示-->
+<view class="NewViewContainer" style="height:100%;" wx:if="{{pageActionView==true && (pageActionViewNewsOrNotify=='NewsTemplate1' || pageActionViewNewsOrNotify=='NotificationTemplate1' || pageActionViewNewsOrNotify=='NotificationTemplate2' )}}">
+
+<view class='NewViewContainer'>
+    <view class='news-article'>
+        <view class='newstt'>{{setData['标题名称']}}</view>
+        <view class='newstime' style="display:flex;justify-content:space-between;"><view>{{setData['发布人']}}</view><view>{{setData['分类名称']}} {{setData['发布时间']}}</view></view>
+        <view class='wxParse' style="margin:0 0 40rpx 0;">
+            <rich-text nodes="{{setData['内容名称']}}" space="emsp" style="text-align: justify;"></rich-text>
+        </view>
+    </view>
+    <view class="bottom-button" bindtap="新生报名登记OPENURL">
+        <button>在线报名</button>
+    </view>
+</view>
+</view>

@@ -1,0 +1,26 @@
+<!--通知的列表显示,纯文件列表显示,不带MobileEndNewsLeftImage的预览-->
+<view class='container' style="{{IsShowBackGroundColor ? 'background:#EEE' : '' }}" wx:if="{{pageActionInit==true && pageActionInitType=='无限表格'}}">
+  
+  <include src="include_report_formsearch.wxml" />
+
+  <view class='list-report-table'>
+    <view class='listxs'>
+
+      <loading hidden="{{!searchLoading}}">正在加载</loading>
+      
+      <scroll-view scroll-x class="tableabc" scroll-y="true" style="height:100%;width: 100%">
+
+        <block wx:for="{{FieldList}}" wx:key="FieldKey" wx:for-item="FieldName" wx:if="{{true}}">
+            <view class='tr'>
+              <view class='th'>{{FieldName}}</view>
+              <block wx:for="{{Records[FieldName]}}" wx:key="RowKey" wx:for-item="RowValue" wx:if="{{true}}">
+                <view class='td'>{{RowValue}}</view>
+              </block>
+          </view>
+        </block>     
+
+      </scroll-view>
+
+    </view>
+  </view>
+</view>

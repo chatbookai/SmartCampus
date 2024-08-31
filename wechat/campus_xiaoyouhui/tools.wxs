@@ -1,0 +1,13 @@
+var status = function (num) {
+  if (num == 1) {
+    return "color1"
+  } else if (num == 2) {
+    return "color2"
+  } else if (num == 3) {
+    return "color3"
+  }
+}
+
+module.exports = {
+  status: status
+}

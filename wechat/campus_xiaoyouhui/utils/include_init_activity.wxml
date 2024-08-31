@@ -1,0 +1,111 @@
+<!--新闻的列表显示,带有一个MobileEndNewsLeftImage的预览-->
+<view class='container' style="{{IsShowBackGroundColor ? 'background:#EEE' : '' }}" wx:if="{{pageActionInit==true && pageActionInitType=='Activity'}}">
+
+<view class="banner" wx:if="{{MainImageList.length>0}}" style="width: 100%; height: auto; margin: 0 0 10rpx 0;">
+  <swiper indicator-dots='ture' autoplay='ture' indicator-color='#fff' indicator-active-color='#17c3c9' interval='5000' circular='ture'>
+    <block wx:for="{{MainImageList}}" wx:key="item">
+      <swiper-item>
+        <image src="{{SYSTEM_URL+item}}" class="slide-image" mode="Widthfix" />
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class='img' wx:if="{{userInfoAvatar!=undefined && userInfoAvatar!=''}}">
+    <image src='{{userInfoAvatar}}' mode="widthFix"></image>
+  </view>
+  <view class='name' wx:if="{{nickName!=undefined && nickName!=''}}">{{nickName}}</view>
+</view>
+
+<view class='list-news'>
+  <scroll-view class="shangla" scroll-y="true" bindscrolltolower="searchScrollLower" style="height:{{scrollHeight}}px;">
+      <!--首部搜索部分菜单 -->
+      <view style="display: flex; flex-wrap: wrap;" wx:if="{{MobileEndShowSearch=='Yes' && menuSearch && menuSearch.range && menuSearch.range.length>0}}">
+          <view style="float: left; position: relative; background-color: #fff;">
+              <view class="kl-item-hd" style="margin-left: 15px;">
+                  <picker name="{{menuSearch.name}}" mode="selector" value="{{menuSearch.value}}" data-name="{{menuSearch.name}}" data-id="{{menuSearch.id}}" id="{{menuSearch.id}}" range-key="{{'value'}}" range="{{menuSearch.range}}" data-range="{{menuSearch.range}}" bindchange="selectListHeaderMenuSearch">
+                  {{menuSearch.chooseName}}
+                  </picker>
+              </view>
+          </view>
+          <view style="float: left; position: relative;">
+              <view class="kl-item-hd">
+                  <input type="text" placeholder="请输入搜索内容" style="height: 100%;" name="searchFieldValue" bindinput="bindKeywordInput" value="{{searchFieldValue}}" />
+              </view>
+          </view>
+          <view style="float: left; position: relative;">
+              <view class="kl-item-hd">
+                  <view class="kl-item-hd" style="text-align: center;" bindtap="FieldSearch">搜索</view>
+              </view>
+          </view>
+      </view>
+
+      <!--首部平铺选项过滤 -->
+      <view class="FilterArrayList" wx:if="{{MobileEndShowGroupFilter=='Yes'}}" style="margin-left: 5px;">
+          <block wx:for="{{filter}}" wx:key="filterIndex" wx:for-item="filterItem">
+              <view class="scroll-container">
+                  <view class="scroll-content">
+                      <block wx:for="{{filterItem.list}}" wx:key="listIndex" wx:for-item="item">
+                          <view class="scroll-content-item-selected" wx:if="{{item.value=='All Data' && item.value==filterItem.selected}}" bindtap="FilterInList" data-filtername="{{filterItem.name}}" data-listvalue="{{item.value}}" >{{filter.length==1?'全部':filterItem.name}}</view>
+                          <view class="scroll-content-item" wx:if="{{item.value=='All Data' && item.value!=filterItem.selected}}" bindtap="FilterInList" data-filtername="{{filterItem.name}}" data-listvalue="{{item.value}}" >{{filter.length==1?'全部':filterItem.name}}</view>
+                          <view class="scroll-content-item-selected" wx:if="{{item.value!='All Data' && item.value==filterItem.selected}}" bindtap="FilterInList" data-filtername="{{filterItem.name}}" data-listvalue="{{item.value}}" >{{item.name}}({{item.num}})</view>
+                          <view class="scroll-content-item" wx:if="{{item.value!='All Data' && item.value!=filterItem.selected}}" bindtap="FilterInList" data-filtername="{{filterItem.name}}" data-listvalue="{{item.value}}" >{{item.name}}({{item.num}})</view>
+                      </block>
+                  </view>
+              </view>
+          </block>
+      </view>
+     
+      <view class="Activity-info-list">
+          <view class="Activity-info-item" wx:for="{{pageMainList}}" wx:key="pageMainListID" wx:for-item="item" bindtap="BindTapButtonView" data-url="/pages/{{tempateType}}/{{tempateId}}View{{item['ViewUrl']}}">
+              <view class="Activity-cell1">{{item['MobileEndNewsTitle']}}</view>
+              <view class="Activity-cell2">
+              <image src="{{item['MobileEndNewsTopAvator']}}"></image>
+              <view>{{item['MobileEndNewsCreator']}} ({{item['MobileEndNewsCreatorGroup']}})</view>
+              </view>
+              <view class="Activity-cell3">
+                  <view class="{{item['MobileEndNewsLeftImage']?'haswidth':''}}">{{item['MobileEndNewsContent']}}</view>
+                  <image src="{{item['MobileEndNewsLeftImage']!=undefined?SYSTEM_URL+'/'+item['MobileEndNewsLeftImage']:'../../images/norecord.png'}}" mode="aspectFill"  style="border-radius: 5px;"></image>
+              </view>
+              <view class="Activity-cell4">
+                  <view class="Activity-nowrap" wx:if="{{item['MobileEndNewsGroup']!=''}}">{{item['MobileEndNewsGroup']}}</view>
+                  <view class="Activity-nowrap" wx:if="{{item['MobileEndNewsEnrollment']!=''}}">报名: {{item['MobileEndNewsEnrollment']}}</view>
+                  <view class="cell" wx:if="{{item['MobileEndNewsLocation']!=''}}">
+                      <image src="/images/xiaoyou/diqu-icon.png"></image>
+                      <text>{{item['MobileEndNewsLocation']}}</text>
+                  </view>
+                  <view class="Activity-nowrap" wx:if="{{item['MobileEndNewsCreateTime']!=''}}">
+                      <image src="/images/xiaoyou/shizhong-icon.png"></image>
+                      <text>{{item['MobileEndNewsCreateTime']}}</text>
+                  </view>
+              </view>
+              <view class="Activity-state {{item['MobileEndActivityStatus']=='进行中'?'jinxingzhong':(item['MobileEndActivityStatus']=='报名中'?'baoming':'yijieshu')}}" wx:if="{{item['MobileEndActivityStatus']!=''}}">
+                  <text wx:if="{{item['MobileEndActivityStatus']=='进行中'}}">进行中</text>
+                  <text wx:elif="{{item['MobileEndActivityStatus']=='报名中'}}">报名中</text>
+                  <text wx:elif="{{item['MobileEndActivityStatus']=='报名结束'}}">报名结束</text>
+                  <text wx:else>未开始</text>
+              </view>
+          </view>
+      </view>
+
+
+    <!-- <view class="loading" hidden="{{!searchLoading}}">正在载入更多...</view> -->
+    <loading hidden="{{!searchLoading}}">正在加载</loading>
+    <block wx:if="{{pageCountTrip}}">
+      <view class="loadAllBox">
+        <view class="line"></view>
+        <view style="font-size:24rpx;">
+          <text class="{{IsShowBackGroundColor ? 'top' : 'topNoUnderline' }}" style="margin-right:10rpx;font-size:24rpx;color:#999;">{{pageCountTrip}}</text>
+          <text class="loading complete" hidden="{{!searchLoadingComplete}}">已加载全部</text>
+        </view>
+        <view class="line"></view>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="loading complete loadAll" hidden="{{!searchLoadingComplete}}">
+        <view class="line"></view>
+        <text>已加载全部</text>
+        <view class="line"></view>
+      </view>
+    </block>
+  </scroll-view>
+</view>
+</view>

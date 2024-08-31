@@ -1,0 +1,109 @@
+<!--新闻 通知 两种模板的查看显示-->
+<view style="padding-bottom: 61px;" wx:if="{{pageActionView==true && (pageActionViewType=='Activity')}}">
+    <view class="ActivityDetail-mode1">
+        <view class="title">{{setData['MobileEndNewsTitle']}}</view>
+        <view class="ActivityDetail-time-type">
+            <text>{{setData['MobileEndNewsCreateTime']}}</text>
+            <text>{{setData['MobileEndNewsGroup']}}</text>
+        </view>
+        <view class="ActivityDetail-info-box">
+            <view class="ActivityDetail-left">
+                <image src="{{setData['MobileEndNewsTopAvator']}}" class="head"></image>
+                <view class="ActivityDetail-name-des">
+                <view class="nickname">{{setData['MobileEndNewsCreator']}}</view>
+                <view class="description">{{setData['MobileEndNewsCreatorGroup']}}</view>
+                </view>
+            </view>
+        </view>
+        <view class="has-bg">
+            <view class="item" wx:if="{{setData['MobileEndActivityDate']!=''}}">
+                <image src="/images/xiaoyou/youxiaoqi-icon.png"></image>
+                <text class="name">{{setData['MobileEndActivityDateName']}}：</text>
+                <text class="val">{{setData['MobileEndActivityDate']}}</text>
+            </view>
+            <view class="item" wx:if="{{setData['MobileEndActivityEnrollEndDate']!=''}}">
+                <image src="/images/xiaoyou/shizhong-icon.png"></image>
+                <text class="name">{{setData['MobileEndActivityEnrollEndDateName']}}：</text>
+                <text class="val">{{setData['MobileEndActivityEnrollEndDate']}}</text>
+            </view>
+            <view class="item" wx:if="{{setData['MobileEndActivityFee']!=''}}">
+                <image src="/images/xiaoyou/feiyong-icon.png"></image>
+                <text class="name">{{setData['MobileEndActivityFeeName']}}：</text>
+                <text class="val">{{setData['MobileEndActivityFee']}}</text>
+            </view>
+            <view class="item" wx:if="{{setData['MobileEndActivityContact']!=''}}">
+                <image src="/images/xiaoyou/lianxi-icon.png"></image>
+                <text class="name">{{setData['MobileEndActivityContactName']}}：</text>
+                <text class="val">{{setData['MobileEndActivityContact']}}</text>
+            </view>
+            <view class="item" wx:if="{{setData['MobileEndNewsLocation']!=''}}">
+                <image src="/images/xiaoyou/diqu-icon.png"></image>
+                <text class="name" style="white-space: nowrap;">{{setData['MobileEndNewsLocationName']}}：</text>
+                <text class="val">{{setData['MobileEndNewsLocation']}}</text>
+            </view>
+            <view class="item" wx:if="{{setData['MobileEndNewsLocation2']!=''}}">
+                <image src="/images/xiaoyou/diqu-icon.png"></image>
+                <text class="name" style="white-space: nowrap;">{{setData['MobileEndNewsLocation2Name']}}：</text>
+                <text class="val">{{setData['MobileEndNewsLocation2']}}</text>
+            </view>
+        </view>
+        <view class="cont-box">
+            <view class="cont">
+                <rich-text nodes="{{setData['MobileEndNewsContent']}}" space="emsp" style="text-align: justify;"></rich-text>
+            </view>
+            <view class="img-box">
+                <image src="{{SYSTEM_URL}}/{{setData['MobileEndNewsLeftImage']}}"></image>
+            </view>
+        </view>
+    </view>
+    <view class="ActivityDetail-mode3" wx:if="{{pageActionView==true && (pageActionViewType=='Activity') && (setData['MobileEndNewsEnableEnroll']=='Yes') }}">
+        <view class="ActivityDetail-left" wx:if="{{setData['MobileEndActivityMyEnrollStatus']==0}}" bindtap="点击报名"  data-action="Enroll" data-domain="{{setData['MobileEndActionType']}}" data-id="{{setData['id']}}">马上报名</view>
+        <view class="ActivityDetail-left-have-enroll" wx:if="{{setData['MobileEndActivityMyEnrollStatus']>0}}" bindtap="点击报名"  data-action="EnrollCancel" data-domain="{{setData['MobileEndActionType']}}" data-id="{{setData['id']}}">取消报名</view>
+        <view class="right">
+            <view class="content">
+                <view>{{setData['MobileEndActivityHaveEnrollNumber']}}人报名</view>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class="ZiXunBottom-box" wx:if="{{pageActionView==true && (pageActionViewType=='Activity')}}">
+    <view class="bottom">
+        <view class="left">
+        </view>
+        <view class="right">
+        <view class="cell1 cell">
+            <image src="/images/xiaoyou/scan-icon.png"></image>
+            <text>{{setData['MobileEndNewsReadCounter']}}</text>
+        </view>
+        <view class="cell2 cell" bindtap="点击收藏" data-action="Favorite" data-domain="{{setData['MobileEndActionType']}}" data-id="{{setData['id']}}">
+            <image src="/images/xiaoyou/collect-icon.png" hidden="{{IsFavorite}}" ></image>
+            <image src="/images/xiaoyou/collect-select-icon.png" hidden="{{!IsFavorite}}"></image>
+            <text>{{FavoriteNumber}}</text>
+        </view>
+        <view class="cell3 cell" bindtap="点击点赞" data-action="Like" data-domain="{{setData['MobileEndActionType']}}" data-id="{{setData['id']}}">
+            <image src="/images/xiaoyou/like-icon.png" hidden="{{IsLike}}"></image>
+            <image src="/images/xiaoyou/like-select-icon.png" hidden="{{!IsLike}}">sss</image>
+            <text>{{LikeNumber}}</text>
+        </view>
+        <view class="cell4 cell" open-type="share" bindtap="onShareAppMessage" data-url="pages/Page/ZiXunView?action=view_default&id={{setData['id']}}">
+            <image src="/images/xiaoyou/share-icon.png"></image>
+            <text>分享</text>
+        </view>
+        </view>
+    </view>
+</view>
+
+<!-- modal  -->
+<view class="ZiXun-modal" wx:if="{{pageActionView==true && (pageActionViewType=='Activity') && PageBottonCommentDialog==true}}">
+<view class="ZiXun-modal-cancel" bindtap="隐藏页面底部的评论对话框"></view>
+<view class="ZiXun-bottom-dialog-body ZiXun-bottom-positon {{isIphoneX?'isIPX':''}}" animation="{{animationData}}">
+  <view class="ZiXun-btn-box">
+    <view class="cancel" bindtap="隐藏页面底部的评论对话框">取消</view>
+    <view class="submit" bindtap="提交页面底部的评论对话框">提交</view>
+  </view>
+  <view class="ZiXun-textarea-box">
+    <textarea  class="ZiXun-textarea" placeholder="请写下您的评论"></textarea>
+  </view>
+</view>
+</view>

@@ -1,0 +1,31 @@
+<!--通知的列表显示,纯文件列表显示,不带MobileEndNewsLeftImage的预览--> 
+<view class="container_group_updown"  style="{{IsShowBackGroundColor ? 'background:#EEE' : '' }}" wx:if="{{pageActionInit==true && pageActionInitType=='上下分组'}}">
+  
+  <include src="include_report_formsearch.wxml" />
+  
+  <view class="container_group_updown_box">
+    <view class="titleBox">
+      <block wx:for="{{FieldList}}" wx:key="item">
+        <view class="{{FieldList.length==1?'titleall':'title'}}" bindtap="报表格式_上下分组" data-id="{{item.id}}" data-fieldlist="{{FieldList}}" data-recordsall="{{RecordsALL}}">
+          <text class="titleTxt {{item.flag?'checked':''}}">{{item.title}}</text>
+        </view>
+      </block>
+    </view>
+    <view>
+      <block wx:for="{{Records}}" wx:for-item="contItem" wx:key="contItemKey">
+        <view class="container_group_updown_content">
+          <view class="date">{{contItem.title}}</view>
+          <scroll-view scroll-x style=" white-space: nowrap; display: flex;">
+            <view class="stateBox">
+              <block wx:for="{{contItem.datalist}}" wx:for-item="stateItem" wx:key="stateItemKey">
+                <view class="stateItem {{stateItem.color}} len{{contItem.length}}" >
+                  <view>{{stateItem.name}}</view>
+                </view>
+              </block>
+            </view>
+          </scroll-view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

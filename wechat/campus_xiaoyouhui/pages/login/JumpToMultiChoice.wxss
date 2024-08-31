@@ -1,0 +1,142 @@
+
+.elastic-frame {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #eee;
+}
+
+.elastic-frame .classes-students-box {
+  height: 100%;
+}
+
+.classes-students-box .classes-students-item {
+  width: 100%;
+  font-size: 30rpx;
+  font-weight: bold;
+  /* margin-bottom: 2rpx; */
+}
+
+.classes-students-box .classes-students-item .title {
+  height: 90rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* background: #46eeeb; */
+  background: #cdeeef;
+  /* background-image: linear-gradient(120deg, #46eeeb 20%, #55e9e6 80%); */
+  margin-bottom: 2rpx;
+  /* border-top: 1px solid #f8f8f8; */
+  padding: 0 42rpx 0 20rpx;
+}
+
+.classes-students-box .classes-students-item .title .img-class {
+  width: 496rpx;
+  display: flex;
+  align-items: center;
+}
+
+.classes-students-box .up-img {
+  width: 24rpx;
+  height: 12rpx;
+  margin-right: 40rpx;
+}
+
+.classes-students-box .up-img image {
+  width: 24rpx;
+  height: 12rpx;
+  display: block;
+}
+
+.classes-students-box .classes-students-item .title .select-box {
+  width: 194rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.classes-students-box .checkbox {
+  width: 38rpx;
+  height: 38rpx;
+  border-radius: 10rpx;
+}
+
+.classes-students-box .checkbox image {
+  width: 38rpx;
+  height: 38rpx;
+}
+
+.classes-students-box .checkbox_selected {
+  width: 40rpx;
+  height: 40rpx;
+}
+.classes-students-box .checkbox_selected image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+
+
+.classes-students-box .select-num {
+  font-size: 30rpx;
+  color: #525d55;
+}
+
+.classes-students-box .studentname-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding: 0 25rpx;
+  background: #f8f8f8;
+}
+
+.classes-students-box .studentname-item .studentname-photo {
+  display: flex;
+  align-items: center;
+}
+
+.classes-students-box .studentname-item .studentname-photo image {
+  width: 60rpx;
+  height: 60rpx;
+  margin-right: 20rpx;
+}
+
+.classes-students-box .classes-students-item .studentname {
+  height: 80rpx;
+  line-height: 80rpx;
+  overflow: hidden;
+}
+
+.down {
+  transform: rotate(180deg);
+}
+
+.confirm-box {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 88rpx;
+  line-height: 88rpx;
+  color: #fff;
+  text-align: center;
+  /* background: #cdeeef; */
+  background-image: linear-gradient(120deg, #46eeeb 20%, #17c3c9 80%);
+}
+
+.confirm-box .confirm-btn {
+  position: absolute;
+  right: 20rpx;
+  top: 10rpx;
+  width: 184rpx;
+  height: 68rpx;
+  line-height: 68rpx;
+  text-align: center;
+  background: #07a8ad;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+  color: #fff;
+}
+

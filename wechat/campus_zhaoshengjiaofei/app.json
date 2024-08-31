@@ -1,0 +1,95 @@
+{
+  "pages": [  
+    "pages/InterfaceInit/ZhuanYe", 
+    "pages/MainData/index",
+    "pages/login/JiaoFieQiTa",
+    "pages/login/JiaoFei",
+    "pages/login/userprofile",
+    "pages/login/weixiaologin",
+    "pages/login/JumpToMultiChoice",
+    "pages/login/NoDataTrip",
+    "pages/login/webview",
+    "pages/login/wechatlogin",
+    "pages/login/logincheck",
+    "pages/login/htmlview",
+    "pages/InterfaceInit/0", 
+    "pages/InterfaceInit/1",
+    "pages/InterfaceInit/2",
+    "pages/InterfaceInit/3",
+    "pages/InterfaceInit/4",
+    "pages/InterfaceInit/5",
+    "pages/InterfaceInit/6",
+    "pages/InterfaceInit/7",
+    "pages/InterfaceInit/8",
+    "pages/InterfaceInit/9",
+    "pages/InterfaceInit/10",
+    "pages/InterfaceInit/11",
+    "pages/InterfaceInit/12",
+    "pages/InterfaceInit/13",
+    "pages/InterfaceInit/14",
+    "pages/InterfaceInit/15",
+    "pages/InterfaceInit/16",
+    "pages/InterfaceInit/17",
+    "pages/InterfaceInit/18",
+    "pages/InterfaceInit/19",
+    "pages/InterfaceInit/20",
+    "pages/InterfaceInit/21",
+    "pages/InterfaceInit/22",
+    "pages/InterfaceInit/23",
+    "pages/InterfaceInit/24",
+    "pages/InterfaceInit/25",
+    "pages/InterfaceInit/26",
+    "pages/InterfaceInit/27",
+    "pages/InterfaceInit/28",
+    "pages/InterfaceInit/29",
+    "pages/InterfaceInit/30",
+    "pages/InterfaceInit/ZhuanYeView",
+    "pages/InterfaceInit/Notify",
+    "pages/InterfaceInit/News",
+    "pages/InterfaceInit/NewsView"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#17c3c9",
+    "navigationBarTitleText": "新生报名缴费",
+    "navigationBarTextStyle": "white"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息将用于地理信息位置考勤."
+    }
+  },
+  "tabBar": {
+    "color": "#cdcdcd",
+    "selectedColor": "#1E95FB",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/InterfaceInit/ZhuanYe",
+        "iconPath": "/images/News.png",
+        "selectedIconPath": "/images/News_on.png",
+        "text": "专业"
+      },
+      {
+        "pagePath": "pages/InterfaceInit/News",
+        "iconPath": "/images/Notify.png",
+        "selectedIconPath": "/images/Notify_on.png",
+        "text": "通知"
+      },
+      {
+        "pagePath": "pages/MainData/index",
+        "iconPath": "/images/Campus.png",
+        "selectedIconPath": "/images/Campus_on.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/login/userprofile",
+        "iconPath": "/images/News.png",
+        "selectedIconPath": "/images/News_on.png",
+        "text": "个人中心"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

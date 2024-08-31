@@ -1,0 +1,63 @@
+
+<!-- 第二部分:微信小程序-列表模板 -->
+<include src="include_init_list.wxml" />
+
+<!-- 第二部分:微信小程序-通知模板 -->
+<include src="include_init_notify.wxml" />
+
+<!-- 第二部分:微信小程序-公告模板 -->
+<include src="include_init_notify2.wxml" />
+
+<!-- 第二部分:微信小程序-新闻模板 -->
+<include src="include_init_news.wxml" />
+
+<!-- 第二部分:微信小程序-校友资讯模板 -->
+<include src="include_init_zixun.wxml" />
+
+<!-- 第二部分:微信小程序-活动模板 -->
+<include src="include_init_activity.wxml" />
+
+<!-- 第二部分:微信小程序-校友查询 -->
+<include src="include_init_schoolmate.wxml" />
+
+<!-- 第二部分:微信小程序-在线课程模板 -->
+<include src="include_init_learning.wxml" />
+
+<!-- 第二部分:微信小程序-校园商城模板 -->
+<include src="include_init_campusshop.wxml" />
+
+<!-- 新建和编辑时所使用的模板 -->
+<include src="include_addedit.wxml" />
+
+<!-- 查看时所使用的模板-普通模板 -->
+<include src="include_view.wxml" />
+
+<!-- 查看时所使用的模板-新闻或是通知模板 -->
+<include src="include_view_newsnotify.wxml" />
+
+<!-- 查看时所使用的模板-校友资讯查看模板 -->
+<include src="include_view_zixun.wxml" />
+
+<!-- 查看时所使用的模板-活动查看模板 -->
+<include src="include_view_activity.wxml" />
+
+<!-- 查看时所使用的模板-校友查看模板 -->
+<include src="include_view_schoolmate.wxml" />
+
+<!-- 微信小程序-无限表格 -->
+<include src="include_report_table_unlimited.wxml" />
+
+<!-- 微信小程序-简单分组 -->
+<include src="include_report_group_simple.wxml" />
+
+<!-- 微信小程序-上下分组 -->
+<include src="include_report_group_updown.wxml" />
+
+<!-- 微信小程序-学生卡片 -->
+<include src="include_report_student_card.wxml" />
+
+<!-- 微信小程序-报表图表 -->
+<include src="include_report_echarts.wxml" />
+
+<!-- 微信小程序-报表图表 -->
+<include src="include_report_echarts_multi.wxml" />

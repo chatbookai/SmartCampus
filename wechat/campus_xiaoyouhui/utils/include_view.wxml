@@ -1,0 +1,49 @@
+<!--列表模板的查看显示,大多数情况时使用的是这个模板,跟掌上校园通用.-->
+<view class="container" wx:if="{{pageActionView==true && pageActionViewType=='ListTemplate1'}}">
+  <!--默认隐藏-->
+  <loading hidden="{{hiddenLoading}}">正在加载</loading>
+  <view class='{{hiddenLoading?"gcy-xq":""}}'>
+    <view class='gcy-xqtt {{hiddenLoading?"xqtt-ishideloading":"xqtt-isshowloading"}}'>{{pagetitle}}</view>
+    <view class='gcy-xqtable {{hiddenLoading?"xqtable-ishideloading":"xqtable-isshowloading"}}' data-url="{{PageIDNumber}}{{PageAction}}">
+      <block wx:for="{{liebiao}}" wx:key="item">
+        <!--以下是显示除了HTML之外的其它写法.-->
+        <block wx:if="{{FieldTypeList[index]!='tdoaportrait'&&FieldTypeList[index]!='tdoafile'&&FieldTypeList[index]!='htmlarea'}}">
+          <view class="{{item['字段类型']=='tdoaportrait'||item['字段类型']=='tdoafile'||item['字段类型']=='textarea'||item['字段类型']=='htmlarea'?'':'tr'}}">
+            <view mode="widthFix" class="td tt {{item['字段类型']=='tdoaportrait'||item['字段类型']=='tdoafile'||item['字段类型']=='textarea'||item['字段类型']=='htmlarea'?'txtareaTitle':''}}" style="white-space: nowrap;">{{item['左边']}}</view>
+            <view mode="widthFix" class="td {{item['字段类型']=='tdoaportrait'||item['字段类型']=='tdoafile'||item['字段类型']=='textarea'||item['字段类型']=='htmlarea'?'showtxtareaBox':''||item['字段类型']=='mobile'?'mobile':''}}">
+              <rich-text nodes="{{item['右边']}}" space="emsp" bindtap="查看页面点击事件" data-value="{{item['右边']}}" data-type="{{item['字段类型']}}"></rich-text>
+            </view>
+          </view>
+        </block>
+        <!--MobileEndNewsLeftImage显示. -->
+        <view wx:if="{{FieldTypeList[index]=='tdoaportrait'}}" data-name="{{FieldNameList[index]}}" data-id="{{index}}" id="{{index}}">
+          <view mode="widthFix" class='td tt imgTitle'>{{item['左边']}}</view>
+          <view mode="widthFix" class='td imgListBox'>
+            <block wx:for="{{item['MobileEndNewsLeftImage数组']}}" wx:key="image_row" wx:for-item="item_image">
+              <image class="IcampusViewPage-DocumentShow" src="{{item_image}}" background-size="cover" data-name="{{item['左边']}}" data-id="{{index}}" data-url="{{item_image}}" data-allimagelist="{{item['MobileEndNewsLeftImage数组']}}" id="{{index}}" bindtap='MobileEndNewsLeftImage放大'></image>
+            </block>
+          </view>
+        </view>
+        <!--附件下载. -->
+        <view wx:if="{{FieldTypeList[index]=='tdoafile'}}" data-name="{{FieldNameList[index]}}" data-id="{{index}}" id="{{index}}">
+          <view mode="widthFix" class='td tt imgTitle'>{{item['左边']}}</view>
+          <view mode="widthFix" class='td imgListBox'>
+            <block wx:for="{{item['附件数组']}}" wx:key="image_row" wx:for-item="item_image">
+              <image class="IcampusViewPage-DocumentShow" src="{{item_image['typeicon']}}" background-size="cover" data-name="{{item['左边']}}" data-id="{{index}}" data-url="{{item_image['url']}}" data-filetype="{{item_image['filetype']}}" data-allimagelist="{{item['附件数组']}}"
+                id="{{index}}" bindtap='附件下载'></image>
+            </block>
+          </view>
+        </view>
+        <!--HTML显示. -->
+        <view class="tr" wx:if="{{FieldTypeList[index]=='htmlarea'}}" data-name="{{FieldNameList[index]}}" data-id="{{index}}" id="{{index}}">
+          <view class='td100_1'>{{item['左边']}}</view>
+        </view>
+        <view class="tr" wx:if="{{FieldTypeList[index]=='htmlarea'}}" data-name="{{FieldNameList[index]}}" data-id="{{index}}" id="{{index}}">
+          <view class='td100_1'>
+            <rich-text nodes="{{item['富文本原始值']}}" space="emsp"></rich-text>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

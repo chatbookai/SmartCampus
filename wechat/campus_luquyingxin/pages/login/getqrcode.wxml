@@ -1,0 +1,10 @@
+<view class="page">
+  <view class='IcampusQRCode'>
+      <view class="imageview">
+        <image bindtap='图片放大' data-url="{{qrcodeurl}}" src="{{qrcode}}"></image>
+      </view>
+      <view class="textview">
+        {{qrcodetext}}
+      </view>
+  </view>
+</view>

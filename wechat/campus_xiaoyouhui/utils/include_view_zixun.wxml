@@ -1,0 +1,53 @@
+<!--新闻 通知 两种模板的查看显示-->
+<view class="NewViewContainer" style="height:100%;padding-bottom: 56px;" wx:if="{{pageActionView==true && (pageActionViewType=='ZiXun')}}">
+    <view class='NewViewContainer'>
+        <view class='news-article'>
+            <view class='newstt'>{{setData['MobileEndNewsTitle']}}</view>
+            <view class='newstime' style="display:flex;justify-content:space-between;"><view>{{setData['MobileEndNewsCreator']}}</view><view>{{setData['MobileEndNewsGroup']}} {{setData['MobileEndNewsCreateTime']}}</view></view>
+            <view class='wxParse' style="margin:0px 0px 50px 0px;">
+                <rich-text nodes="{{setData['MobileEndNewsContent']}}" space="emsp" style="text-align: justify;"></rich-text>
+            </view>
+        </view>
+    </view>
+</view>
+
+<view class="ZiXunBottom-box" wx:if="{{pageActionView==true && (pageActionViewType=='ZiXun')}}">
+  <view class="bottom">
+    <view class="left">
+    </view>
+    <view class="right">
+      <view class="cell1 cell">
+        <image src="/images/xiaoyou/scan-icon.png"></image>
+        <text>{{setData['MobileEndNewsReadCounter']}}</text>
+      </view>
+      <view class="cell2 cell" bindtap="点击收藏" data-action="Favorite" data-domain="{{setData['MobileEndActionType']}}" data-id="{{setData['id']}}11">
+        <image src="/images/xiaoyou/collect-icon.png" hidden="{{IsFavorite}}" ></image>
+        <image src="/images/xiaoyou/collect-select-icon.png" hidden="{{!IsFavorite}}"></image>
+        <text>{{FavoriteNumber}}</text>
+      </view>
+      <view class="cell3 cell" bindtap="点击点赞" data-action="Like" data-domain="{{setData['MobileEndActionType']}}" data-id="{{setData['id']}}">
+        <image src="/images/xiaoyou/like-icon.png" hidden="{{IsLike}}"></image>
+        <image src="/images/xiaoyou/like-select-icon.png" hidden="{{!IsLike}}">sss</image>
+        <text>{{LikeNumber}}</text>
+      </view>
+      <view class="cell4 cell" open-type="share" bindtap="onShareAppMessage" data-url="pages/Page/ZiXunView?action=view_default&id={{setData['id']}}">
+        <image src="/images/xiaoyou/share-icon.png"></image>
+        <text>分享</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+ <!-- modal  -->
+ <view class="ZiXun-modal" wx:if="{{pageActionView==true && (pageActionViewType=='ZiXun') && PageBottonCommentDialog==true}}">
+    <view class="ZiXun-modal-cancel" bindtap="隐藏页面底部的评论对话框"></view>
+    <view class="ZiXun-bottom-dialog-body ZiXun-bottom-positon {{isIphoneX?'isIPX':''}}" animation="{{animationData}}">
+      <view class="ZiXun-btn-box">
+        <view class="cancel" bindtap="隐藏页面底部的评论对话框">取消</view>
+        <view class="submit" bindtap="提交页面底部的评论对话框">提交</view>
+      </view>
+      <view class="ZiXun-textarea-box">
+        <textarea  class="ZiXun-textarea" placeholder="请写下您的评论"></textarea>
+      </view>
+    </view>
+</view>

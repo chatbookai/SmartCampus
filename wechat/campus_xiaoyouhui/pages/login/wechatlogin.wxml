@@ -1,0 +1,34 @@
+<view wx:if="{{canIUse}}">
+  <view class='avatar'>
+      <open-data type="userAvatarUrl"></open-data>
+  </view>
+
+  <view class='itembg'>
+    <view class='indexbg'>
+    </view>
+  </view>
+
+  <view class='logo' wx:if="{{IndexLogo.length>0}}">
+    <image src='{{IndexLogo}}' mode="widthFix"></image>
+  </view>
+
+  <view class='IcampusWechatLogin'>
+      <view class='text' hidden="{{IntroHiddenPriv ? true : false}}">
+        <rich-text nodes="{{TextMemo}}" space="emsp"></rich-text>
+        <checkbox-group bindchange="CheckCheckboxProtocolSatus">
+          <checkbox value="agree" checked="{{CheckedBoxIsChecked ? true : false}}"/><label bindtap="CheckCheckboxProtocolSatus" data-id="agree">我已阅读并同意</label>
+          <label style='color:#CCAE73' bindtap='查看HTML文本' data-id="小程序使用协议">《用户协议》</label>
+        </checkbox-group>
+      </view>
+  </view>
+
+  <button class='bottom' lang="zh_CN"  bindtap="bindGetUserProfile" disabled="{{isFormSubmitButtonDisabled}}" >
+        {{ShouQuanDengLu}}
+  </button>
+
+</view>
+
+<view wx:else>请升级微信版本</view>
+
+
+

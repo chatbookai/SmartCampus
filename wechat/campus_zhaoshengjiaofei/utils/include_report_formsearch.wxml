@@ -1,0 +1,51 @@
+  <!-- 报表部分的搜索区域代码,几个报表共享 -->
+  <view class='HeaderSearch' wx:if="{{FORM_SEARCH['表单启用']}}">
+    <form bindsubmit="获取报表接口内容">
+
+      <view class="section">
+        <view class="title75">{{FORM_SEARCH['表单标题']}}</view>
+      </view>    
+
+      <block wx:for="{{FORM_SEARCH['表单字段']}}" wx:key="index" wx:for-item="SEARCH_LINE">    
+
+        <view class="section" wx:if="{{SEARCH_LINE['类型']=='下拉'}}">
+          <view class="title25">{{SEARCH_LINE['名称']}}</view>
+          <view class="titleright">
+            <picker bindchange="报表图表_搜索区域_选择下拉" value="{{SEARCH_LINE['选中值索引']}}" range="{{SEARCH_LINE['数据']}}" data-alldata="{{FORM_SEARCH}}" data-fieldname="{{SEARCH_LINE['名称']}}" data-index="{{index}}" data-selectvalue="{{SEARCH_LINE['数据']}}">
+              <view class="titleright">{{SEARCH_LINE['选中值']}}</view>
+              <input name="{{SEARCH_LINE['名称']}}" hidden value="{{SEARCH_LINE['选中值']}}" />
+            </picker>
+          </view>
+        </view>
+
+        <view class="section" wx:if="{{SEARCH_LINE['类型']=='模糊'}}">
+          <view class="title25">{{SEARCH_LINE['名称']}}</view>
+            <view class="title75">
+              <input name="{{SEARCH_LINE['名称']}}" placeholder="请输入{{SEARCH_LINE['名称']}}" placeholder-style="color:#ccc" />
+            </view>
+        </view>
+
+        <view class="section" wx:if="{{SEARCH_LINE['类型']=='日期'}}">
+        <view class="title25">开始时间:</view>
+        <view class="title25_2">
+          <picker mode="date" value="{{SEARCH_LINE['开始时间']}}" start="2000-09-01" end="2030-09-01" bindchange="报表图表_搜索区域_开始时间" data-alldata="{{FORM_SEARCH}}" data-fieldname="{{SEARCH_LINE['名称']}}" data-index="{{index}}">
+            <input name="开始时间" value="{{SEARCH_LINE['开始时间']}}"/>
+          </picker>
+        </view>
+        <view class="title25">结束时间:</view>
+        <view class="title25_2">
+          <picker mode="date" value="{{SEARCH_LINE['结束时间']}}" start="2000-09-01" end="2030-09-01" bindchange="报表图表_搜索区域_结束时间" data-alldata="{{FORM_SEARCH}}" data-fieldname="{{SEARCH_LINE['名称']}}" data-index="{{index}}">
+            <input name="结束时间" value="{{SEARCH_LINE['结束时间']}}"/>
+          </picker>
+        </view>
+      </view> 
+
+      </block>
+      
+      <view class="formSubmit">
+        <input name="action" value="DataDeal" hidden="true"/>
+        <button formType="submit" class='submit'>{{FORM_SEARCH['搜索按钮']}}</button>
+      </view>
+
+    </form>
+  </view>

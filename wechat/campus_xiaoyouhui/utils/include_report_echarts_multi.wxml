@@ -1,0 +1,121 @@
+<!--通知的列表显示,纯文件列表显示,不带MobileEndNewsLeftImage的预览--> 
+<view class="move-container"  style="{{IsShowBackGroundColor ? 'background:#EEE' : '' }}" wx:if="{{pageActionInit==true && pageActionInitType=='报表图表组合'}}">
+  <loading hidden="{{!searchLoading}}">正在加载</loading>
+  <view class='HeaderSearch' wx:if="{{FORM_IS_USING}}">
+    <form bindsubmit="获取报表接口内容">
+      <view class="section">
+        <view class="title75">{{FORM_TITLE}}</view>
+      </view>    
+      <view class="section">
+        <view class="title25">开始时间:</view>
+        <view class="title25_2">
+          <picker mode="date" value="{{date}}" start="2015-09-01" end="2030-09-01" bindchange="报表图表组合_搜索区域_开始时间">
+            <input name="开始时间" value="{{BEGIN_DATE}}"/>
+            <input name="action" value="search" hidden="true"/>
+          </picker>
+        </view>
+        <view class="title25">结束时间:</view>
+        <view class="title25_2">
+          <picker mode="date" value="{{date}}" start="2015-09-01" end="2030-09-01" bindchange="报表图表组合_搜索区域_结束时间">
+            <input name="结束时间" value="{{END_DATE}}"/>
+          </picker>
+        </view>
+      </view>
+      <view class="section" wx:if="{{SEARCH_NAME!='停用'}}">
+        <view class="title25">搜索姓名</view>
+          <view class="title75">
+            <input name="搜索姓名" placeholder="请输入姓名或学生学号" placeholder-style="color:#ccc" />
+          </view>
+      </view>      
+      <view class="section" wx:if="{{SEARCH_BANJI!='停用'}}">
+        <view class="title25">选择班级</view>
+        <view class="titleright">
+          <picker bindchange="报表图表组合_搜索区域_选择班级" value="{{SelectBanJiArray[SelectBanJiIndex]}}" range="{{SelectBanJiArray}}">
+            <view class="titleright">{{SelectBanJiArray[SelectBanJiIndex]}}</view>
+            <input name="选择班级" hidden value="{{SelectBanJiArray[SelectBanJiIndex]}}" />
+          </picker>
+        </view>
+      </view>
+      <view class="formSubmit">
+        <button formType="submit" class='submit'>搜索</button>
+      </view>
+    </form>
+  </view>
+  <block wx:for="{{EcChartFunction}}" wx:key="F" wx:for-item="SingleChart">
+  
+    <view class="container_group2_simple" wx:if="{{SingleChart['EcChartFunctionType']=='标题'}}">
+      <view class="container_group2_simple_itembox">
+        <view class="itemall">{{SingleChart['报表名称']}}</view>
+      </view>
+    </view>
+
+    <view class="container_group2_simple" wx:if="{{SingleChart['EcChartFunctionType']=='简单分组'}}">
+      <view class="container_group2_simple_itembox {{SingleChart['字段列表'].length}}">
+        <view class="itemall">{{SingleChart['报表名称']}}</view>
+      </view>
+      <view class="container_group2_simple_itembox {{SingleChart['字段列表'].length}}">
+        <block wx:for="{{SingleChart['字段列表']}}" wx:key="index">
+          <view class="item{{SingleChart['字段列表'].length}}">{{item}}</view>
+        </block>
+      </view>
+      <block wx:for="{{SingleChart['记录列表']}}" wx:key="index">
+        <view class="container_group2_simple_itembox {{SingleChart['字段列表'].length}}">
+          <view class="container_group2_simple_item">
+            <view>{{item[SingleChart['字段列表'][0]]}}</view>
+          </view>
+          <view class="item{{SingleChart['字段列表'].length}}">
+            {{item[SingleChart['字段列表'][1]]}}
+          </view>
+          <view class="item{{SingleChart['字段列表'].length}} {{[SingleChart['字段列表'][2]]=='详情'?'detail':''}}" wx:if="{{item[SingleChart['字段列表'][2]]}}">
+            {{item[SingleChart['字段列表'][2]]}}
+          </view>
+          <view class="item{{SingleChart['字段列表'].length}} {{[SingleChart['字段列表'][3]]=='详情'?'detail':''}}" wx:if="{{item[SingleChart['字段列表'][3]]}}">
+            {{item[SingleChart['字段列表'][3]]}}
+          </view>
+          <view class="item{{SingleChart['字段列表'].length}} {{[SingleChart['字段列表'][4]]=='详情'?'detail':''}}" wx:if="{{item[SingleChart['字段列表'][4]]}}">
+            {{item[SingleChart['字段列表'][4]]}}
+          </view>
+          <view class="item{{SingleChart['字段列表'].length}} {{[SingleChart['字段列表'][5]]=='详情'?'detail':''}}" wx:if="{{item[SingleChart['字段列表'][5]]}}">
+            {{item[SingleChart['字段列表'][5]]}}
+          </view>
+        </view>
+      </block>
+    </view>
+
+    <view class="container_group2_updown" wx:if="{{SingleChart['EcChartFunctionType']=='上下分组'}}">
+      <view class="container_group2_updown_box">
+        <view class="titleBox">
+          <view class="titleall">{{SingleChart['报表名称']}}</view>
+        </view>
+        <view class="titleBox">
+          <block wx:for="{{SingleChart['字段列表']}}" wx:key="item">
+            <view class="{{SingleChart['字段列表'].length==1?'titleall':'title'}}" bindtap="报表格式_上下分组_组合图表使用" data-id="{{item.id}}"  data-mainid="{{SingleChart['编号']}}" data-fieldlist="{{SingleChart['字段列表']}}" data-recordsall="{{SingleChart['记录列表全部']}}" data-ecchartfunction="{{EcChartFunction}}">
+              <text class="titleTxt {{item.flag?'checked':''}}">{{item.title}}</text>
+            </view>
+          </block>
+        </view>
+        <view>
+          <block wx:for="{{SingleChart['记录列表']}}" wx:for-item="contItem" wx:key="contItemKey">
+            <view class="container_group2_updown_content">
+              <view class="date">{{contItem.title}}</view>
+              <scroll-view scroll-x style=" white-space: nowrap; display: flex;">
+                <view class="stateBox">
+                  <block wx:for="{{contItem.datalist}}" wx:for-item="stateItem" wx:key="stateItemKey">
+                    <view class="stateItem {{stateItem.color}} len{{contItem.length}}" >
+                      <view>{{stateItem.name}}</view>
+                    </view>
+                  </block>
+                </view>
+              </scroll-view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+
+    <view wx:if="{{SingleChart['EcChartFunctionType']=='折线图'||SingleChart['EcChartFunctionType']=='饼图'}}">
+      <ec-canvas id="mychart-dom-move-line" canvas-id="mychart-move-line" ec="{{ SingleChart }}"></ec-canvas>
+    </view>
+
+  </block>
+</view>

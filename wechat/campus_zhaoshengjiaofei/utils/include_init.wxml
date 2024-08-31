@@ -1,0 +1,202 @@
+<!-- 说明:当前页面分为三种模板:列表,新闻,通知. 三种都为列表类型的模板. -->
+<!-- 第一部分:微信小程序-列表模板 -->
+<view class='containerInit' style="{{IsShowBackGroundColor ? 'background:#EEE' : '' }}" wx:if="{{pageActionInit==true && pageActionInitNewsOrNotify=='ListTemplate1'}}">
+  <view class='sjktab' wx:if="{{false}}">
+    <view class="son-nav">
+
+      <!--首部批量审核意见 -->
+      <!--
+      <view class="FilterArrayList" hidden="{{operationHiddenPriv ? true : false}}">
+              <view style='width: 9%; float: left; position: relative;'>  
+                <view class="kl-item-hd">
+                {{menuOperation.number}}
+                </view>
+              </view>
+              <view class="FilterArrayList-item3">  
+                <view class="kl-item-hd"> 
+                  <input type="text" placeholder="请输入审核内容" style="height: 100%;" name="searchShenHeWord" bindinput="bindShenHeWordInput" value="{{searchShenHeWord}}" /> 
+                </view>
+              </view>
+              <view class="FilterArrayList-item3">  
+                <view class="kl-item-hd"> 
+                  <picker name="{{menuOperation.name}}" mode="selector" value="{{menuOperation.value}}" data-name="{{menuOperation.name}}" data-id="{{menuOperation.id}}" id="{{menuOperation.id}}" range="{{menuOperation.range}}" data-range="{{menuOperation.range}}" bindchange="selectmenuOperation">
+                      {{menuOperation.chooseName}}
+                  </picker>
+                </view>
+              </view>              
+              <view class="FilterArrayList-item4">  
+                <view class="kl-item-hd"> 
+                  <view class="kl-item-hd" bindtap="PiLiangShenHekeywordSearch">提交</view> 
+                </view> 
+              </view>               
+      </view> 
+      -->
+
+    </view>
+  </view>
+
+  <!--当前模块备注说明 -->
+  <view class='ku-list' wx:if="{{pagememotitle!=undefined && pagememotitle!=''}}">
+    <view class='pagememotitle'>　{{pagememotitle}}</view>
+    <view class='pagememo'>
+      {{pagememo}}
+    </view>
+  </view>
+
+  <view class='ku-list' hidden="{{pageListHiddenPriv ? true : false}}">
+    <scroll-view class="shangla" scroll-y="true" bindscrolltolower="searchScrollLower" style="height:{{scrollHeight}}px;">
+        <!--首部搜索部分菜单 -->
+        <view style="display: flex; flex-wrap: wrap;" wx:if="{{MobileEndShowSearch=='Yes'}}">
+            <view style="width: 35%; float: left; position: relative;">
+                <view class="kl-item-hd" style="margin-left: 5px;">
+                    <picker name="{{menuSearch.name}}" mode="selector" value="{{menuSearch.value}}" data-name="{{menuSearch.name}}" data-id="{{menuSearch.id}}" id="{{menuSearch.id}}" range-key="{{'value'}}" range="{{menuSearch.range}}" data-range="{{menuSearch.range}}" bindchange="selectListHeaderMenuSearch">
+                    {{menuSearch.chooseName}}
+                    </picker>
+                </view>
+            </view>
+            <view style="width: 35%; float: left; position: relative;">
+                <view class="kl-item-hd">
+                    <input type="text" placeholder="请输入搜索内容" style="height: 100%;" name="searchFieldValue" bindinput="bindKeywordInput" value="{{searchFieldValue}}" />
+                </view>
+            </view>
+            <view style="width: 30%; float: left; position: relative;">
+                <view class="kl-item-hd">
+                    <view class="kl-item-hd" style="text-align: center;" bindtap="FieldSearch">搜索</view>
+                </view>
+            </view>
+        </view>
+
+        <!--首部平铺选项过滤 -->
+        <view class="FilterArrayList" hidden="{{MobileEndShowGroupFilter!='Yes' ? true : false}}">
+            <block wx:for="{{filter}}" wx:key="filterIndex" wx:for-item="filterItem">
+                <view class="scroll-container">
+                    <view class="scroll-content">
+                        <block wx:for="{{filterItem.list}}" wx:key="listIndex" wx:for-item="item">
+                            <view class="scroll-content-item-selected" wx:if="{{item.value=='All Data' && item.value==filterItem.selected}}" bindtap="FilterInList" data-filtername="{{filterItem.name}}" data-listvalue="{{item.value}}" >{{filterItem.name}}</view>
+                            <view class="scroll-content-item" wx:if="{{item.value=='All Data' && item.value!=filterItem.selected}}" bindtap="FilterInList" data-filtername="{{filterItem.name}}" data-listvalue="{{item.value}}" >{{filterItem.name}}</view>
+                            <view class="scroll-content-item-selected" wx:if="{{item.value!='All Data' && item.value==filterItem.selected}}" bindtap="FilterInList" data-filtername="{{filterItem.name}}" data-listvalue="{{item.value}}" >{{item.name}}({{item.num}})</view>
+                            <view class="scroll-content-item" wx:if="{{item.value!='All Data' && item.value!=filterItem.selected}}" bindtap="FilterInList" data-filtername="{{filterItem.name}}" data-listvalue="{{item.value}}" >{{item.name}}({{item.num}})</view>
+                        </block>
+                    </view>
+                </view>
+            </block>
+        </view>
+
+        <block wx:for="{{pageMainList}}" wx:key="pageMainListID" wx:for-item="item">
+            <view class="IcampusListRow-item">
+            <!-->列表模板-允许编辑<-->
+            <view class="IcampusListRow-icon" wx:if="{{item['EditUrl']!==undefined&&item['EditUrl']!==''&&item['Template']=='List'}}">
+                <image src="{{item['MobileEndIconImage']!==undefined?SYSTEM_URL+item['MobileEndIconImage']:'../../images/norecord.png'}}"></image>
+            </view>
+            <view class="IcampusListRow-content" wx:if="{{item['EditUrl']!==undefined&&item['EditUrl']!==''&&item['Template']=='List'}}">
+                <navigator url="/pages/{{tempateType}}/{{tempateId}}{{item['EditUrl']}}" hover-class="none">
+                    <view class="IcampusListRow-title">{{item['MobileEndFirstLine']}}</view>
+                    <view class="content-bottom">
+                        <view class="quantity-status" style="background:{{item['MobileEndSecondLineLeft']!='' ? IcampusRowColor[item['MobileEndSecondLineRightColor']] : 'rgb(236, 49, 149)'}};">{{item['MobileEndSecondLineLeft']}}</view>
+                        <view class="unapproved-quantity">{{item['MobileEndSecondLineRight']}}</view>
+                    </view>
+                </navigator>
+            </view>
+            <!-->浏览器模板-有URL时需要加跳转链接<-->
+            <view class="IcampusListRow-icon" wx:if="{{item['EditUrl']!==undefined&&item['EditUrl']!==''&&item['Template']=='浏览器'}}">
+                <image src="{{item['MobileEndIconImage']!==undefined?SYSTEM_URL+item['MobileEndIconImage']:'../../images/norecord.png'}}"></image>
+            </view>
+            <view class="IcampusListRow-content" wx:if="{{item['EditUrl']!==undefined&&item['EditUrl']!==''&&item['Template']=='浏览器'}}">
+                <navigator url="/pages/login/webview?url={{item['EditUrl']}}" hover-class="none">
+                <view class="IcampusListRow-title">{{item['MobileEndFirstLine']}}</view>
+                <view class="content-bottom">
+                    <view class="quantity-status" style="background:{{item['MobileEndSecondLineLeft']!='' ? IcampusRowColor[item['MobileEndSecondLineRightColor']] : 'rgb(236, 49, 149)'}};">{{item['MobileEndSecondLineLeft']}}</view>
+                    <view class="unapproved-quantity">{{item['MobileEndSecondLineRight']}}</view>
+                </view>
+                </navigator>
+            </view>
+            <view class="next-icon" wx:if="{{item['EditUrl']!==undefined&&item['EditUrl']!==''&&item['DeleteUrl']==undefined}}">
+                <image src="../../images/next.png"></image>
+            </view>
+            <view class="delete-icon" wx:if="{{item['DeleteUrl']!==undefined&&item['DeleteUrl']!==''}}" bindtap="每行记录删除操作" data-deleteurl="{{item['DeleteUrl']}}" data-pageid="{{item['PageId']}}" data-id="{{item['Id']}}">
+                <image src="../../images/no02.png"></image>
+            </view>
+
+            <!-->没有URL时不需要加跳转链接<-->
+            <view class="IcampusListRow-icon" wx:if="{{item['EditUrl']==undefined||item['EditUrl']==''}}">
+                <image src="{{item['MobileEndIconImage']!==undefined?SYSTEM_URL+item['MobileEndIconImage']:'../../images/norecord.png'}}"></image>
+            </view>
+            <view class="IcampusListRow-content" wx:if="{{item['EditUrl']==undefined||item['EditUrl']==''}}">
+                <view class="IcampusListRow-title">{{item['MobileEndFirstLine']}}</view>
+                    <view class="content-bottom">
+                        <view class="quantity-status" style="background:{{item['MobileEndSecondLineLeft']!='' ? IcampusRowColor[item['MobileEndSecondLineRightColor']] : 'rgb(236, 49, 149)'}};">{{item['MobileEndSecondLineLeft']}}</view>
+                        <view class="unapproved-quantity">{{item['MobileEndSecondLineRight']}}</view>
+                    </view>
+                </view>
+                <view class="next-icon" wx:if="{{item['EditUrl']==undefined||item['EditUrl']==''}}">
+                </view>
+            </view>
+        </block>
+
+        <!-- <view class="loading" hidden="{{!searchLoading}}">正在载入更多...</view> -->
+        <loading hidden="{{!searchLoading}}">正在加载</loading>
+        
+        <block wx:if="{{pageCountTrip}}">
+            <view class="loadAllBox">
+            <view class="line"></view>
+            <view style="font-size:24rpx;">
+                <text class="{{IsShowBackGroundColor ? 'top' : 'topNoUnderline' }}" style="margin-right:10rpx;font-size:24rpx;color:#999;">{{pageCountTrip}}</text>
+                <text class="loading complete" hidden="{{!searchLoadingComplete}}">已加载全部</text>
+            </view>
+            <view class="line"></view>
+            </view>
+        </block>
+
+        <block wx:else>
+            <view class="loading complete loadAll" hidden="{{!searchLoadingComplete}}">
+            <view class="line"></view>
+            <text>已加载全部</text>
+            <view class="line"></view>
+            </view>
+        </block>
+
+    </scroll-view>
+  </view>
+</view>
+
+<!-- 第二部分:微信小程序-通知模板 -->
+<include src="include_init_notify.wxml" />
+
+<!-- 第二部分:微信小程序-公告模板 -->
+<include src="include_init_notify2.wxml" />
+
+<!-- 第二部分:微信小程序-新闻模板 -->
+<include src="include_init_news.wxml" />
+
+<!-- 第二部分:微信小程序-在线课程模板 -->
+<include src="include_init_learning.wxml" />
+
+<!-- 第二部分:微信小程序-校园商城模板 -->
+<include src="include_init_campusshop.wxml" />
+
+<!-- 新建和编辑时所使用的模板 -->
+<include src="include_addedit.wxml" />
+
+<!-- 查看时所使用的模板-普通模板 -->
+<include src="include_view.wxml" />
+
+<!-- 查看时所使用的模板-新闻或是通知模板 -->
+<include src="include_view_newsnotify.wxml" />
+
+<!-- 微信小程序-无限表格 -->
+<include src="include_report_table_unlimited.wxml" />
+
+<!-- 微信小程序-简单分组 -->
+<include src="include_report_group_simple.wxml" />
+
+<!-- 微信小程序-上下分组 -->
+<include src="include_report_group_updown.wxml" />
+
+<!-- 微信小程序-学生卡片 -->
+<include src="include_report_student_card.wxml" />
+
+<!-- 微信小程序-报表图表 -->
+<include src="include_report_echarts.wxml" />
+
+<!-- 微信小程序-报表图表 -->
+<include src="include_report_echarts_multi.wxml" />

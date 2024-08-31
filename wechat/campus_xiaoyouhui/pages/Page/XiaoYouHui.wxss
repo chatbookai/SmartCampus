@@ -1,0 +1,256 @@
+@import "../../utils/include_view.wxss";
+
+.top-container {
+  width: 100%;
+  height: 300rpx;
+  background: #17c3c9;
+}
+
+.top-container .img-box {
+  width: 100%;
+  text-align: right;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+
+.top-container image {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 30rpx;
+}
+
+.top-container .title {
+  font-size: 50rpx;
+  letter-spacing: 30rpx;
+  color: #fff;
+  text-align: center;
+  font-weight: bolder;
+}
+
+.content-box {
+  position: relative;
+  top: -80rpx;
+}
+
+.nav-box {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  background: #fff;
+  width: 690rpx;
+  margin-left: 30rpx;
+  border-radius: 20rpx;
+  padding-top: 30rpx;
+  padding-bottom: 20rpx;
+  box-shadow: 0px 0px 32rpx 10rpx rgba(0, 0, 0, .08);
+  /* padding: 40rpx;
+  box-sizing: border-box; */
+}
+
+.nav-box .nav-item {
+  display: flex;
+  flex-direction: column;
+  width: 172rpx;
+  padding: 30rpx 0 20rpx;
+  align-items: center;
+  font-size: 26rpx;
+  color: #858585;
+}
+
+.nav-box .nav-item image {
+  width: 60rpx;
+  height: 60rpx;
+  margin-bottom: 30rpx;
+}
+
+.common-box {
+  margin: 60rpx 20rpx 20rpx;
+}
+
+.common-box .title-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.common-box .title-box .left {
+  display: flex;
+  align-items: center;
+}
+
+.common-box .title-box .left view {
+  width: 8rpx;
+  height: 34rpx;
+  background: #484D57;
+  border-radius: 8rpx;
+  margin-right: 20rpx;
+}
+
+.common-box .title-box .left text {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #484D57;
+}
+
+.common-box .title-box .more-box {
+  display: flex;
+  align-items: center;
+}
+
+.common-box .title-box .more-box image {
+  width: 20rpx;
+  height: 20rpx;
+  margin-left: 10rpx;
+}
+
+.ZiXun-list {}
+
+.ZiXun-list .info-item {
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #A9A9A9;
+}
+
+.info-item .title {
+  font-size: 28rpx;
+  color: #020202;
+  font-weight: bold;
+  line-height: 50rpx;
+  margin-bottom: 20rpx;
+  width: 100%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.info-item .cont {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30rpx;
+}
+
+.info-item .cont .detail {
+  font-size: 26rpx;
+  color: #020202;
+  line-height: 40rpx;
+  width: 500rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.info-item .cont image {
+  width: 200rpx;
+  height: 120rpx;
+}
+
+.info-item .commont-info {
+  display: flex;
+  align-items: center;
+}
+.info-item .cell{
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  color: #A9A9A9;
+  margin-right: 30rpx;
+}
+.info-item .cell image {
+  width: 24rpx;
+  height: 24rpx;
+  margin-right: 6rpx;
+}
+
+.hotService {
+  width: 100%;
+  padding: 30rpx 0;
+  /* height: 300rpx;
+  background-color: #fff;
+  padding: 0 26rpx;
+  box-sizing: border-box; */
+}
+
+.hotServiceList_box {
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.block {
+  width: 300rpx;
+  height: 400rpx;
+  border: 1rpx solid #CACACA;
+  display: inline-block;
+  margin-right: 20rpx;
+}
+
+.blockContent {
+  width: 100%;
+  height: 100%;
+  color: #333;
+  font-size: 28rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+.blockContent image{
+  width: 250rpx;
+  height: 310rpx;
+  margin-bottom: 10rpx;
+}
+
+.block:first-child {
+  padding: 0 15rpx 0 0;
+}
+
+/* 活动集锦 */
+.Activity-list{
+  
+}
+.Activity-list .Activity-item{
+  padding: 30rpx 0;
+  border-bottom: 1rpx solid #A9A9A9;
+}
+.Activity-list .Activity-item .title{
+  font-size: 28rpx;
+  color: #0C0C0C;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+.Activity-list .Activity-item .cont{
+  font-size: 26rpx;
+  color: #0C0C0C;
+  margin-bottom: 28rpx;  
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* 显示3行 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.Activity-list .Activity-item .bottom{
+  display: flex;
+  font-size: 24rpx;
+  color: #A6A6A6;
+}
+.Activity-list .Activity-item .bottom view{
+  margin-right: 30rpx
+}
+
+.appointment-headurl {
+  height: auto;
+  padding: 30rpx 0;
+  display: flex;
+}
+
+.appointment-headurl image {
+  display: inline-block;
+  border-style: solid;
+  font-weight: bold;
+  border-width: 1rpx;
+  border-color: white;
+  border-radius: 50%;
+}

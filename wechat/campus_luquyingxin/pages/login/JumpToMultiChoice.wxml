@@ -1,0 +1,65 @@
+<view class="elastic-frame">
+  <view class="classes-students-box">
+    <scroll-view scroll-y="true" style="width:100%;height:623px;padding-bottom:44px;">
+      <block wx:for="{{classList}}" wx:for-item="classItem" wx:for-index="classIndex" wx:key="index">
+        <view class="classes-students-item">
+          <view class="title" bindtap="showToggle" data-classid="{{classItem.classid}}">
+            <view class="img-class">
+              <view class="up-img">
+                <image src="../../images/jumpwindow_1.png" class="{{classItem.open ? 'down' : ''}}"></image>
+              </view>
+              <view class="classes" style="color:#333;">
+                {{classItem.classname}}
+              </view>
+            </view>
+            <view class="select-box">
+              <view catchtap="bindSelectAll" data-classid="{{classItem.classid}}">
+                <image class="checkbox_selected" src="../../images/yes01.png" wx:if="{{classItem.selected}}"></image>
+                <image class="checkbox" src="../../images/jumpwindow_2.png" wx:else></image>
+              </view>
+              <view class="select-num" style="color:#333;">{{classItem.selectedNum}}/{{classItem.totalNum}}</view>
+            </view>
+          </view>
+          <view class="studentname-box" wx:if="{{classItem.open}}">
+            <scroll-view scroll-y="true" style="width:100%;max-height:567px;background:#eee;">
+              <block wx:for="{{classItem.studentList}}" wx:for-item="nameItem" wx:key="index">
+                <view class="studentname-item">
+                  <view class="studentname-photo">
+                    <image src="../../images/photo.png"></image>
+                    <view class="studentname">
+                      <block wx:if="{{nameItem.studentname==nameItem.studentid}}">
+                        <text>{{nameItem.studentname}}</text>
+                      </block>
+                      <block wx:else>
+                        <view style="display:flex;font-size:28rpx;color:#333;">
+                          <view style="width:240rpx;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">
+                            <text>{{nameItem.studentname}}</text>
+                          </view>
+                          <view style="width:200rpx;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">
+                            <text>{{nameItem.studentid}}</text>
+                          </view>
+                        </view>
+                      </block>
+                      <!-- {{ nameItem.studentname==nameItem.studentid ? nameItem.studentname : nameItem.studentname+' '+nameItem.studentid }} -->
+                    </view>
+                  </view>
+                  <view bindtap="bindCheckbox" data-studentid="{{nameItem.studentid}}" data-classid="{{classItem.classid}}">
+                    <image class="checkbox_selected" src="../../images/yes01.png" wx:if="{{nameItem.selected}}"></image>
+                    <image class="checkbox" src="../../images/jumpwindow_2.png" wx:else></image>
+                  </view>
+                </view>
+              </block>
+            </scroll-view>
+          </view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+  <view class="confirm-box" bindtap="confirm">
+    <!-- <view class="confirm-btn">
+      确定（
+      <text>{{total}}</text>）
+    </view> -->
+    确认（{{total}}）
+  </view>
+</view>

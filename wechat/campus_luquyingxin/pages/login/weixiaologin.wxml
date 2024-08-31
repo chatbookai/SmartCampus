@@ -1,0 +1,55 @@
+<view wx:if="{{canIUse}}">
+  <view class='avatar'>
+      <open-data type="userAvatarUrl"></open-data>
+  </view>
+
+  <chooseSchool 
+    wx:if="{{chooseSchool}}" 
+    appKey="{{appKey}}" 
+    bindschoolChooseGetInfo="选择学校_得到信息" 
+    bindschoolChooseCancel="选择学校_取消"
+    bindschoolChooseErrofInfo="选择学校_错误"
+  />
+
+  <login 
+    wx:if="{{weixiaoLogin}}" 
+    schoolCode="{{schoolCode}}" 
+    openId="{{openid}}" 
+    bindverifyStudent="腾讯微卡_校验学生"
+    bindloginCancel="腾讯微卡_取消登录"
+    appId="{{appKey}}" 
+    appKey="{{appSecret}}" 
+    bindcardChooseGetInfo="腾讯微卡_选择得到信息"
+    bindcardChooseCancel="腾讯微卡_选择取消"
+    bindcardChooseErrofInfo="腾讯微卡_选择错误信息"
+/>
+
+  <view class='itembg'>
+    <view class='indexbg'>
+    </view>
+  </view>
+
+  <view class='logo' wx:if="{{IndexLogo.length>0}}">
+    <image src='{{IndexLogo}}' mode="widthFix"></image>
+  </view>
+
+  <view class='IcampusWechatLogin'>
+      <view class='text' hidden="{{IntroHiddenPriv ? true : false}}">
+        <rich-text nodes="{{TextMemo}}" space="emsp"></rich-text>
+        <checkbox-group bindchange="CheckCheckboxProtocolSatus">
+          <checkbox value="agree" checked="{{CheckedBoxIsChecked ? true : false}}"/><label bindtap="CheckCheckboxProtocolSatus" data-id="agree">我已阅读并同意</label>
+          <label style='color:#CCAE73' bindtap='查看HTML文本' data-id="小程序使用协议">《用户协议》</label>
+        </checkbox-group>
+      </view>
+  </view>
+
+  <button class='bottom' open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="bindGetUserInfo" disabled="{{isFormSubmitButtonDisabled}}" >
+        {{ShouQuanDengLu}}
+  </button>
+
+</view>
+
+<view wx:else>请升级微信版本</view>
+
+
+

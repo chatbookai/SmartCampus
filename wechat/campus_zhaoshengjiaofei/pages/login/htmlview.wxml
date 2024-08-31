@@ -1,0 +1,7 @@
+<view class="page">
+  <view class='IcampusWechatLogin'>
+      <view class='text'>
+        <rich-text nodes="{{TextMemo}}" space="emsp"></rich-text>
+      </view>
+  </view>
+</view>

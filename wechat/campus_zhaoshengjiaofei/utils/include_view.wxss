@@ -1,0 +1,36 @@
+/* pages/gcsjkxq/index.wxss */
+.imgTitle,.txtareaTitle{
+  margin: 0 20rpx;
+  height: 50rpx;
+  line-height: 50rpx;
+  padding-left: 20rpx;
+  color: #666;
+}
+.imgListBox{
+  width: 690rpx;
+  margin-left: 20rpx;
+  padding-top: 8rpx;
+  padding-left: 20rpx;
+  background: #fff;
+  margin-bottom: 4rpx;
+}
+
+
+/** BTN **/
+.cmpt-biz-detail-mode-btn {
+	width: 100%;
+	font-size: 26rpx;
+	color: #fff;
+	display: flex;
+	margin-top: 20rpx;
+	justify-content: flex-start;
+}
+
+.cmpt-biz-detail-mode-btn>view,.cmpt-biz-detail-mode-btn>button{
+	font-size: 24rpx;
+	color: #fff;
+	margin-right: 20rpx;
+	padding: 6rpx 25rpx;
+	border-radius: 30rpx;
+	border: 2rpx solid #999999;
+}

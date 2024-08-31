@@ -1,0 +1,77 @@
+<!--通知的列表显示,纯文件列表显示,不带图片的预览-->
+<view class='containerInit' style="{{IsShowBackGroundColor ? 'background:#EEE' : '' }}" wx:if="{{pageActionInit==true && pageActionInitNewsOrNotify=='NotificationTemplate2'}}">
+  <view class='list-notify2'>
+    <scroll-view class="shangla" scroll-y="true" bindscrolltolower="searchScrollLower" style="height:{{(!searchLoading&&(!headerHiddenPriv||!searchHiddenPriv)) ? scrollHeight : scrollHeight}}px;">
+      <!--首部搜索部分菜单 -->
+      <view style="display: flex; flex-wrap: wrap;" wx:if="{{MobileEndShowSearch=='Yes'}}">
+            <view style="width: 35%; float: left; position: relative;">
+                <view class="kl-item-hd" style="margin-left: 5px;">
+                    <picker name="{{menuSearch.name}}" mode="selector" value="{{menuSearch.value}}" data-name="{{menuSearch.name}}" data-id="{{menuSearch.id}}" id="{{menuSearch.id}}" range-key="{{'value'}}" range="{{menuSearch.range}}" data-range="{{menuSearch.range}}" bindchange="selectListHeaderMenuSearch">
+                    {{menuSearch.chooseName}}
+                    </picker>
+                </view>
+            </view>
+            <view style="width: 35%; float: left; position: relative;">
+                <view class="kl-item-hd">
+                    <input type="text" placeholder="请输入搜索内容" style="height: 100%;" name="searchFieldValue" bindinput="bindKeywordInput" value="{{searchFieldValue}}" />
+                </view>
+            </view>
+            <view style="width: 30%; float: left; position: relative;">
+                <view class="kl-item-hd">
+                    <view class="kl-item-hd" style="text-align: center;" bindtap="FieldSearch">搜索</view>
+                </view>
+            </view>
+        </view>
+
+        <!--首部平铺选项过滤 -->
+        <view class="FilterArrayList" hidden="{{MobileEndShowGroupFilter!='Yes' ? true : false}}">
+            <block wx:for="{{filter}}" wx:key="filterIndex" wx:for-item="filterItem">
+                <view class="scroll-container">
+                    <view class="scroll-content">
+                        <block wx:for="{{filterItem.list}}" wx:key="listIndex" wx:for-item="item">
+                            <view class="scroll-content-item-selected" wx:if="{{item.value=='All Data' && item.value==filterItem.selected}}" bindtap="FilterInList" data-filtername="{{filterItem.name}}" data-listvalue="{{item.value}}" >{{item.name}}</view>
+                            <view class="scroll-content-item" wx:if="{{item.value=='All Data' && item.value!=filterItem.selected}}" bindtap="FilterInList" data-filtername="{{filterItem.name}}" data-listvalue="{{item.value}}" >{{item.name}}</view>
+                            <view class="scroll-content-item-selected" wx:if="{{item.value!='All Data' && item.value==filterItem.selected}}" bindtap="FilterInList" data-filtername="{{filterItem.name}}" data-listvalue="{{item.value}}" >{{item.name}}({{item.num}})</view>
+                            <view class="scroll-content-item" wx:if="{{item.value!='All Data' && item.value!=filterItem.selected}}" bindtap="FilterInList" data-filtername="{{filterItem.name}}" data-listvalue="{{item.value}}" >{{item.name}}({{item.num}})</view>
+                        </block>
+                    </view>
+                </view>
+            </block>
+        </view>
+        
+        <block wx:for="{{pageMainList}}" wx:key="pageMainListID" wx:for-item="item" wx:if="{{true}}">
+        <navigator url="/pages/{{tempateType}}/{{tempateId}}{{item['ViewUrl']}}" hover-class="none">
+            <view class="date">{{item['MobileEndNewsCreateTime']}}</view>
+            <view class="list-notify2-contentBox">
+              <view class="title">{{item['MobileEndNewsTitle']}}</view>
+              <view class="content"><view class="contentDetail"><text decode="nbsp">{{item['MobileEndNewsContent']}}</text></view></view>
+              <view class="msgBox">
+                <view class="addresser">{{item['MobileEndNewsCreator']}} 阅读:{{item['MobileEndNewsReadCounter']}}</view>
+                <view>查看详情</view>
+              </view>
+            </view>
+        </navigator>
+      </block>
+
+      <!-- <view class="loading" hidden="{{!searchLoading}}">正在载入更多...</view> -->
+      <loading hidden="{{!searchLoading}}">正在加载</loading>
+      <block wx:if="{{pageCountTrip}}">
+        <view class="loadAllBox">
+          <view class="line"></view>
+          <view style="font-size:24rpx;">
+            <text class="{{IsShowBackGroundColor ? 'top' : 'topNoUnderline' }}" style="margin-right:10rpx;font-size:24rpx;color:#999;">{{pageCountTrip}}</text>
+            <text class="loading complete" hidden="{{!searchLoadingComplete}}">已加载全部</text>
+          </view>
+          <view class="line"></view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="loading complete loadAll" hidden="{{!searchLoadingComplete}}">
+          <view class="line"></view>
+          <text>已加载全部</text>
+          <view class="line"></view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+</view>

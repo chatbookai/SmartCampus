@@ -1,0 +1,123 @@
+<view>
+  <view class="top-container">
+    <view class="img-box">
+      <image src="/images/xiaoyou/share-white.png"></image>
+    </view>
+    <view class="title">{{Header}}</view>
+  </view>
+  <view class="content-box">
+    <view class="nav-box" wx:if="{{IconList && IconList.length>0}}">
+        <block wx:for="{{IconList}}" wx:key="IconListIndex" wx:for-item="IconListItem">
+            <view class="nav-item" bindtap="点击单个图标跳转" data-url="{{item.url}}" >
+                <image src="{{IconListItem.image}}"></image>
+                <text>{{IconListItem.name}}</text>
+            </view>
+        </block>
+    </view>
+    <view class="zixun-box common-box" wx:if="{{ZiXun && ZiXun.title && ZiXun.data && ZiXun.data.length>0}}">
+      <view class="title-box">
+        <view class="left">
+          <view></view>
+          <text>{{ZiXun.title}}</text>
+        </view>
+        <view class="more-box" bindtap="点击单个图标跳转" data-url="/pages/Page/ZiXun">
+          <text>更多</text>
+          <image src="/images/xiaoyou/gengduo.png"></image>
+        </view>
+      </view>
+      <view class="ZiXun-list">
+        <block wx:for="{{ZiXun.data}}" wx:key="ZiXunDataIndex" wx:for-item="ZiXunDataItem">
+            <view class='itemx' bindtap="BindTapButtonView" data-url="/pages/Page/ZiXunView{{ZiXunDataItem['ViewUrl']}}">
+                <view class="ZiXun-Item">
+                    <view class="title">{{ZiXunDataItem['标题']}}</view>
+                    <view class="cont">
+                    <view class="detail">{{ZiXunDataItem['内容']}}</view>
+                    <image src="{{SYSTEM_URL}}/{{ZiXunDataItem['图片']}}" style="border-radius: 5px;"></image>
+                    </view>
+                    <view class="ZiXun-info">
+                        <view class="read cell">阅读: {{ZiXunDataItem['MobileEndNewsReadCounter']}}</view>
+                        <view class="cell">
+                            <image src="/images/xiaoyou/favorite.png"></image>
+                            <text>{{ZiXunDataItem['MobileEndNewsFavoriteCounter']}}</text>
+                        </view>
+                        <view class="cell">
+                            <image src="/images/xiaoyou/like-icon.png"></image>
+                            <text>{{ZiXunDataItem['MobileEndNewsLikeCounter']}}</text>
+                        </view>
+                        <view class="cell">{{ZiXunDataItem['最近更新时间']}}</view>
+                    </view>
+                </view>
+            </view>
+        </block>
+      </view>
+    </view>
+    <view class="xiangce-box common-box" wx:if="{{Album && Album.data && Album.data.length>0}}">
+      <view class="title-box">
+        <view class="left">
+          <view></view>
+          <text>{{Album.title}}</text>
+        </view>
+        <view class="more-box" bindtap="点击单个图标跳转" data-url="{{Album.more}}">
+          <text>更多</text>
+          <image src="/images/xiaoyou/gengduo.png"></image>
+        </view>
+      </view>
+      <view class="hotService">
+        <view class="hotServiceList_box">
+          <!-- 这里为滚动的内容部分 -->
+          <scroll-view class="hotServiceList_scroll" scroll-x="true">
+            <view class="hotService_content">
+              <block wx:for="{{Album.data}}"  wx:key="AlbumDataIndex" wx:for-item="AlbumDataItem">
+                <view class="block{{AlbumDataIndex}} block">
+                  <view class="blockContent">
+                    <image src="{{SYSTEM_URL}}/{{AlbumDataItem['image']}}"></image>
+                    <text>{{AlbumDataItem['name']}}</text>
+                  </view>
+                </view>
+              </block>
+            </view>
+          </scroll-view>
+        </view>
+      </view>
+    </view>
+    <view class="Activity-box common-box" wx:if="{{Activity && Activity.title && Activity.data && Activity.data.length>0}}">
+      <view class="title-box">
+        <view class="left">
+          <view></view>
+          <text>{{Activity.title}}</text>
+        </view>
+        <view class="more-box" bindtap="点击单个图标跳转" data-url="/pages/Page/Activity">
+          <text>更多</text>
+          <image src="/images/xiaoyou/gengduo.png"></image>
+        </view>
+      </view>
+      <view class="Activity-list">      
+        <block wx:for="{{Activity.data}}" wx:key="ActivityDataIndex" wx:for-item="ActivityDataItem">                
+        <view class="Activity-item" bindtap="BindTapButtonView" data-url="/pages/Page/ActivityView{{ActivityDataItem['ViewUrl']}}">
+          <view class="title">{{ActivityDataItem['标题']}}</view>
+          <view class="cont" >{{ActivityDataItem['描述']}}</view>
+          <view class="bottom">
+            <view>浏览: {{ActivityDataItem['浏览次数']}}</view>
+            <view>活动: {{ActivityDataItem['活动日期']}}</view>
+            <view>截止: {{ActivityDataItem['报名截止']}}</view>
+            <view>报名: {{ActivityDataItem['报名人数']}}/{{ActivityDataItem['最大报名人数']}}</view>
+          </view>
+        </view>
+        </block>
+      </view>
+    </view>
+    <view class="huoyue-box common-box" wx:if="{{LastActivityUser && LastActivityUser.length>0}}">
+      <view class="title-box">
+        <view class="left">
+          <view></view>
+          <text>最近活跃</text>
+        </view>
+      </view>
+      <view class="appointment-headurl" wx:if="{{LastActivityUser.length>0}}">
+          <view wx:for="{{LastActivityUser}}" wx:key="index" style='transform:translateX({{-index*36}}rpx)'>
+            <image src="{{item}}" mode="aspectFill" style="width:80rpx;height:80rpx;"></image>
+          </view>
+        </view>
+    </view>
+  </view>
+</view>

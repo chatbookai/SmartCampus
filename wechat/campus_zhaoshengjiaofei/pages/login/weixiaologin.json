@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText": "授权登录",
+    "usingComponents": {
+      "login": "plugin://myPlugin/login",
+      "chooseSchool": "plugin://myPlugin/chooseSchool"
+    }
+}

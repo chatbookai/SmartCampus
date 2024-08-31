@@ -1,0 +1,690 @@
+<!--默认隐藏-->
+<loading hidden="{{hiddenLoading}}">正在加载...</loading>
+
+<view class="container" wx:if="{{pageActionAddEdit}}">
+
+  <form bindsubmit="表单校验" bindreset="表单重置">
+
+    <view class='{{hiddenLoading?"sectionTitle ishideLoading":""}}'>{{pageTitle}}</view>
+
+    <block wx:for="{{liebiao}}" wx:key="item">
+
+        <!--隐藏变量. -->
+        <view wx:if="{{item['type']==='hidden'}}">
+            <input data-index="{{index}}" type="text" name="{{item['label']}}" value="{{data[item['name']]}}" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}" hidden='true' data-fieldlist="{{FieldListArray}}" maxlength='500' />
+        </view>
+        <!--隐藏变量. -->
+        <view wx:if="{{item['type']==='editor'}}">
+            <input data-index="{{index}}" type="text" name="{{item['label']}}" value="{{data[item['name']]}}" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}" hidden='true' data-fieldlist="{{FieldListArray}}" maxlength='500' />
+        </view>
+
+        <!--只读显示区. -->
+        <view class="section readonly " wx:if="{{item['type']=='readonly'}}">
+            <view class="editElementLeft">
+            {{item['label']}}
+            <text style="color:#17c3c9;font-size:20rpx;">(只读)</text>
+            </view>
+            <view>
+            <view class="editElementRight" class="td {{item['字段类型2']=='mobile'?'mobile':''}}" bindtap="查看页面点击事件" data-value="{{data[item['name']]}}" data-type="{{item['字段类型2']}}">{{data[item['name']]}}</view>
+            <view class="editElementRightIcon"></view>
+            </view>
+            <input data-index="{{index}}" type="text" name="{{item['label']}}" value="{{data[item['name']]}}" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}" hidden='true' data-fieldlist="{{FieldListArray}}" data-ismustvalue="{{item['rules']['required']}}" maxlength='500' />
+        </view>
+
+        <!--按钮跳转区域,未完成. -->
+        <view class="section readonly " wx:if="{{item['type']=='buttonrouter'}}">
+            <view class="editElementLeft">
+            {{item['label']}}
+            <text style="color:#17c3c9;font-size:20rpx;">(只读)</text>
+            </view>
+            <view>
+            <view class="editElementRight" class="td {{item['字段类型2']=='mobile'?'mobile':''}}" bindtap="查看页面点击事件" data-value="{{data[item['name']]}}" data-type="{{item['字段类型2']}}">{{data[item['name']]}}</view>
+            <view class="editElementRightIcon"></view>
+            </view>
+            <input data-index="{{index}}" type="text" name="{{item['label']}}" value="{{data[item['name']]}}" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}" hidden='true' data-fieldlist="{{FieldListArray}}" data-ismustvalue="{{item['rules']['required']}}" maxlength='500' />
+        </view>
+
+        <!--按钮跳转区域,未完成. -->
+        <view class="section readonly " wx:if="{{item['type']=='buttonurl'}}">
+            <view class="editElementLeft">
+            {{item['label']}}
+            <text style="color:#17c3c9;font-size:20rpx;">(只读)</text>
+            </view>
+            <view>
+            <view class="editElementRight" class="td {{item['字段类型2']=='mobile'?'mobile':''}}" bindtap="查看页面点击事件" data-value="{{data[item['name']]}}" data-type="{{item['字段类型2']}}">{{data[item['name']]}}</view>
+            <view class="editElementRightIcon"></view>
+            </view>
+            <input data-index="{{index}}" type="text" name="{{item['label']}}" value="{{data[item['name']]}}" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}" hidden='true' data-fieldlist="{{FieldListArray}}" data-ismustvalue="{{item['rules']['required']}}" maxlength='500' />
+        </view>
+
+        <!--只读显示区. -->
+        <view class="section readonly " wx:if="{{item['type']=='readonlytextarea'}}">
+            <view class="editElementLeft">
+            {{item['label']}}
+            <text style="color:#17c3c9;font-size:20rpx;">(只读)</text>
+            </view>
+            <view>
+            <view class="editElementRight">{{data[item['name']]}}</view>
+            <view class="editElementRightIcon"></view>
+            </view>
+            <input data-index="{{index}}" type="text" name="{{item['label']}}" value="{{data[item['name']]}}" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}" hidden='true' data-fieldlist="{{FieldListArray}}" data-ismustvalue="{{item['rules']['required']}}" maxlength='500' />
+        </view>
+
+        <!--单行文本输入框. -->
+        <view class="section" wx:if="{{item['type']=='input' || item['type']=='email' || item['type']=='number' || item['type']=='float'}}">
+            <view class="editElementLeft">
+            {{item['label']}}
+            <text style="color:red;margin-left:6rpx;" wx:if="{{item['rules']['required']}}">{{item['rules']['required']==true?'*':''}}</text>
+            <text style="color:#17c3c9;font-size:20rpx;" wx:if="{{item['helptext']!='' && item['helptext']!=undefined}}">({{item['helptext']}})</text>
+            </view>
+            <view style="display:flex;align-items:center;">
+            <view class="editElementRight">
+                <input data-index="{{index}}" style="text-align:right" type="{{(item['mobilekeyboard']==''||item['mobilekeyboard']==undefined)?'text':item['mobilekeyboard']}}" name="{{item['label']}}" touchend="resetBtnClick" bindinput="{{item['校验']}}" focus="{{item['FormFocus']}}" placeholder="{{(item['placeholder']==''||item['placeholder']==undefined)?'请输入'+item['label']:item['placeholder']}}"
+                value="{{data[item['name']]}}" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}" data-fieldlist="{{FieldListArray}}" data-value="{{data[item['name']]}}" data-ismustvalue="{{item['rules']['required']}}"  data-userdefinejsfunction="{{item['自定义JS函数']}}" placeholder-style="color:#999;" maxlength='500' data-liebiao="{{liebiao}}"/>
+            </view>
+            <view class="editElementRightIcon" wx:if="{{!(item['FieldCheckResult']==undefined)}}">
+                <image class="IcampusViewPageRowRightIcon" src="{{((item['FieldCheckResult']==undefined)&&item['rules']['required']==true)?'':item['FieldCheckResult']}}" />
+            </view>
+            </view>
+        </view>
+
+        <!--password. -->
+        <view class="section" wx:if="{{item['type']=='password'}}">
+            <view class="editElementLeft">
+            {{item['label']}}
+            <text style="color:red;margin-left:6rpx;">{{item['rules']['required']==true?'*':''}}</text>
+            </view>
+            <view style="display:flex;align-items:center;">
+            <view class="editElementRight">
+                <input data-index="{{index}}" style="text-align:right" type="{{(item['mobilekeyboard']==''||item['mobilekeyboard']==undefined)?'text':item['mobilekeyboard']}}" name="{{item['label']}}" touchend="resetBtnClick" bindinput="{{item['校验']}}" focus="{{item['FormFocus']}}" placeholder="{{(item['placeholder']==''||item['placeholder']==undefined)?'请输入'+item['label']:item['placeholder']}}"
+                value="{{data[item['name']]}}" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}" data-fieldlist="{{FieldListArray}}" data-value="{{data[item['name']]}}" data-ismustvalue="{{item['rules']['required']}}"  data-userdefinejsfunction="{{item['自定义JS函数']}}" placeholder-style="color:#999;" maxlength='500' data-liebiao="{{liebiao}}"/>
+            </view>
+            <view class="editElementRightIcon" wx:if="{{!(item['FieldCheckResult']==undefined)}}">
+                <image class="IcampusViewPageRowRightIcon" src="{{((item['FieldCheckResult']==undefined)&&item['rules']['required']==true)?'':item['FieldCheckResult']}}" />
+            </view>
+            </view>
+        </view>
+
+        <!--多行文本输入框. -->
+        <view wx:if="{{item['type']=='textarea'}}">
+            <view class="editElementLeft txtareaTitle">
+            {{item['label']}}
+            <text style="color:red;margin-left:6rpx;" wx:if="{{item['rules']['required']}}">{{item['rules']['required']==true?'*':''}}</text>
+            <text style="color:#17c3c9;font-size:20rpx;" wx:if="{{item['helptext']!='' && item['helptext']!=undefined}}">({{item['helptext']}})</text>
+            </view>
+            <view style="display:flex;align-items:center;">
+            <view class="editElementRight">
+                <textarea data-index="{{index}}" name="{{item['label']}}" touchend="resetBtnClick" bindinput="{{item['校验']}}" focus="{{item['FormFocus']}}" placeholder="{{(item['placeholder']==''||item['placeholder']==undefined)?'请输入'+item['label']:item['placeholder']}}" value="{{data[item['name']]}}" data-name="{{item['label']}}" data-id="{{index}}"
+                id="{{index}}" data-fieldlist="{{FieldListArray}}" data-value="{{data[item['name']]}}" data-ismustvalue="{{item['rules']['required']}}" cursor-spacing='140' maxlength="-1" />
+            </view>
+            <view class="editElementRightIcon" wx:if="{{!(item['FieldCheckResult']==undefined)}}">
+                <image class="IcampusViewPageRowRightIcon" src="{{((item['FieldCheckResult']==undefined)&&item['rules']['required']==true)?'':item['FieldCheckResult']}}" />
+            </view>
+            </view>
+        </view>
+
+        <!--循环日期类型的数据,有开始时间,结束时间,提交时间等. -->
+        <view class="section" wx:if="{{item['type']==='datetime'}}">
+            <view class="editElementLeft">
+            {{item['label']}}
+            <text style="color:red;margin-left:6rpx;" wx:if="{{item['rules']['required']}}">{{item['rules']['required']==true?'*':''}}</text>
+            <text style="color:#17c3c9;font-size:20rpx;" wx:if="{{item['helptext']!='' && item['helptext']!=undefined}}">({{item['helptext']}})</text>
+            </view>
+            <view style="display:flex;align-items:center;">
+            <view class="editElementRight">
+                <picker data-index="{{index}}" name="{{item['label']}}_渲染" mode="date" value="{{data[item['name']]}}" start="{{item['选项'][0]}}" end="{{item['选项'][1]}}" bindchange="日期控件" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}" fields="day" data-fieldlist="{{FieldListArray}}" data-ismustvalue="{{item['rules']['required']}}"
+                disabled="{{item['rules']['disabled']}}">
+                {{data[item['name']]}}
+                </picker>
+                <input name="{{item['label']}}" value="{{data[item['name']]}}" hidden='true' />
+            </view>
+            <view class="editElementRightIcon" wx:if="{{!(item['FieldCheckResult']==undefined)}}">
+                <image class="IcampusViewPageRowRightIcon" src="{{((item['FieldCheckResult']==undefined)&&item['rules']['required']==true)?'':item['FieldCheckResult']}}" />
+            </view>
+            </view>
+        </view>
+
+        <!--循环日期类型的数据,有开始时间,结束时间,提交时间等. -->
+        <view class="section" wx:if="{{item['type']==='date' || item['type']==='date1' || item['type']==='date2'}}">
+            <view class="editElementLeft">
+            {{item['label']}}
+            <text style="color:red;margin-left:6rpx;" wx:if="{{item['rules']['required']}}">{{item['rules']['required']==true?'*':''}}</text>
+            <text style="color:#17c3c9;font-size:20rpx;" wx:if="{{item['helptext']!='' && item['helptext']!=undefined}}">({{item['helptext']}})</text>
+            </view>
+            <view style="display:flex;align-items:center;">
+            <view class="editElementRight">
+                <picker data-index="{{index}}" name="{{item['label']}}_渲染" mode="date" value="{{data[item['name']]}}" start="{{item['选项'][0]}}" end="{{item['选项'][1]}}" bindchange="日期控件" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}" fields="day" data-fieldlist="{{FieldListArray}}" data-ismustvalue="{{item['rules']['required']}}"
+                disabled="{{item['rules']['disabled']}}">
+                {{data[item['name']]}}
+                </picker>
+                <input name="{{item['label']}}" value="{{data[item['name']]}}" hidden='true' />
+            </view>
+            <view class="editElementRightIcon" wx:if="{{!(item['FieldCheckResult']==undefined)}}">
+                <image class="IcampusViewPageRowRightIcon" src="{{((item['FieldCheckResult']==undefined)&&item['rules']['required']==true)?'':item['FieldCheckResult']}}" />
+            </view>
+            </view>
+        </view>
+
+        <!--循环时间类型的数据,有开始时间,结束时间,提交时间等. -->
+        <view class="section" wx:if="{{item['type']==='time'}}">
+            <view class="editElementLeft">
+            {{item['label']}}
+            <text style="color:red;margin-left:6rpx;" wx:if="{{item['rules']['required']}}">{{item['rules']['required']==true?'*':''}}</text>
+            <text style="color:#17c3c9;font-size:20rpx;" wx:if="{{item['helptext']!='' && item['helptext']!=undefined}}">({{item['helptext']}})</text>
+            </view>
+            <view style="display:flex;align-items:center;">
+            <view class="editElementRight">
+                <picker data-index="{{index}}" name="{{item['label']}}_渲染" mode="time" value="{{data[item['name']]}}" start="{{item['选项'][0]}}" end="{{item['选项'][1]}}" bindchange="时间控件" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}" data-fieldlist="{{FieldListArray}}" data-ismustvalue="{{item['rules']['required']}}">
+                {{data[item['name']]}}
+                </picker>
+                <input name="{{item['label']}}" value="{{data[item['name']]}}" hidden='true' />
+            </view>
+            <view class="editElementRightIcon" wx:if="{{!(item['FieldCheckResult']==undefined)}}">
+                <image class="IcampusViewPageRowRightIcon" src="{{((item['FieldCheckResult']==undefined)&&item['rules']['required']==true)?'':item['FieldCheckResult']}}" />
+            </view>
+            </view>
+
+        </view>
+
+        <!--year. -->
+        <view class="section" wx:if="{{item['type']==='year'}}">
+            <view class="editElementLeft">
+            {{item['label']}}
+            <text style="color:red;margin-left:6rpx;" wx:if="{{item['rules']['required']}}">{{item['rules']['required']==true?'*':''}}</text>
+            <text style="color:#17c3c9;font-size:20rpx;" wx:if="{{item['helptext']!='' && item['helptext']!=undefined}}">({{item['helptext']}})</text>
+            </view>
+            <view style="display:flex;align-items:center;">
+            <view class="editElementRight">
+                <picker data-index="{{index}}" name="{{item['label']}}_渲染" mode="date" value="{{data[item['name']]}}" start="{{item['选项'][0]}}" end="{{item['选项'][1]}}" bindchange="日期控件" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}" fields="day" data-fieldlist="{{FieldListArray}}" data-ismustvalue="{{item['rules']['required']}}"
+                disabled="{{item['rules']['disabled']}}">
+                {{data[item['name']]}}
+                </picker>
+                <input name="{{item['label']}}" value="{{data[item['name']]}}" hidden='true' />
+            </view>
+            <view class="editElementRightIcon" wx:if="{{!(item['FieldCheckResult']==undefined)}}">
+                <image class="IcampusViewPageRowRightIcon" src="{{((item['FieldCheckResult']==undefined)&&item['rules']['required']==true)?'':item['FieldCheckResult']}}" />
+            </view>
+            </view>
+        </view>
+
+        <!--month. -->
+        <view class="section" wx:if="{{item['type']==='month'}}">
+            <view class="editElementLeft">
+            {{item['label']}}
+            <text style="color:red;margin-left:6rpx;" wx:if="{{item['rules']['required']}}">{{item['rules']['required']==true?'*':''}}</text>
+            <text style="color:#17c3c9;font-size:20rpx;" wx:if="{{item['helptext']!='' && item['helptext']!=undefined}}">({{item['helptext']}})</text>
+            </view>
+            <view style="display:flex;align-items:center;">
+            <view class="editElementRight">
+                <picker data-index="{{index}}" name="{{item['label']}}_渲染" mode="date" value="{{data[item['name']]}}" start="{{item['选项'][0]}}" end="{{item['选项'][1]}}" bindchange="日期控件" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}" fields="day" data-fieldlist="{{FieldListArray}}" data-ismustvalue="{{item['rules']['required']}}"
+                disabled="{{item['rules']['disabled']}}">
+                {{data[item['name']]}}
+                </picker>
+                <input name="{{item['label']}}" value="{{data[item['name']]}}" hidden='true' />
+            </view>
+            <view class="editElementRightIcon" wx:if="{{!(item['FieldCheckResult']==undefined)}}">
+                <image class="IcampusViewPageRowRightIcon" src="{{((item['FieldCheckResult']==undefined)&&item['rules']['required']==true)?'':item['FieldCheckResult']}}" />
+            </view>
+            </view>
+        </view>
+
+        <!--quarter. -->
+        <view class="section" wx:if="{{item['type']==='quarter'}}">
+            <view class="editElementLeft">
+            {{item['label']}}
+            <text style="color:red;margin-left:6rpx;" wx:if="{{item['rules']['required']}}">{{item['rules']['required']==true?'*':''}}</text>
+            <text style="color:#17c3c9;font-size:20rpx;" wx:if="{{item['helptext']!='' && item['helptext']!=undefined}}">({{item['helptext']}})</text>
+            </view>
+            <view style="display:flex;align-items:center;">
+            <view class="editElementRight">
+                <picker data-index="{{index}}" name="{{item['label']}}_渲染" mode="date" value="{{data[item['name']]}}" start="{{item['选项'][0]}}" end="{{item['选项'][1]}}" bindchange="日期控件" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}" fields="day" data-fieldlist="{{FieldListArray}}" data-ismustvalue="{{item['rules']['required']}}"
+                disabled="{{item['rules']['disabled']}}">
+                {{data[item['name']]}}
+                </picker>
+                <input name="{{item['label']}}" value="{{data[item['name']]}}" hidden='true' />
+            </view>
+            <view class="editElementRightIcon" wx:if="{{!(item['FieldCheckResult']==undefined)}}">
+                <image class="IcampusViewPageRowRightIcon" src="{{((item['FieldCheckResult']==undefined)&&item['rules']['required']==true)?'':item['FieldCheckResult']}}" />
+            </view>
+            </view>
+        </view>
+
+        <!--循环一列SELECT类型的数据,有类型,类别,民族等之类的单个下拉框. -->
+        <!--单选在微信小程序里面也使用下拉的控件,主要是为了防止单选项目太多,造成页面布局错乱 -->
+        <!--data-relativeupadte  data-relativejsonfilter 这两个变量为掌上校园的[关联更新]控件使用-->
+        <view class="section" wx:if="{{item['type']==='select' || item['type']==='tablefilter' || item['type']==='tablefiltercolor'}}">
+            <view class="editElementLeft">
+            {{item['label']}}
+            <text style="color:#17c3c9;font-size:20rpx;" wx:if="{{item['rules']['disabled']}}">(只读)</text>
+            <text style="color:red;margin-left:6rpx;" wx:if="{{item['rules']['required'] && item['rules']['disabled']==false}}">{{item['rules']['required']==true?'*':''}}</text>
+            <text style="color:#17c3c9;font-size:20rpx;" wx:if="{{item['helptext']!='' && item['helptext']!=undefined}}">({{item['helptext']}})</text>
+            </view>
+            <view style="display:flex;align-items:center;">
+            <view class="editElementRight">
+                <picker data-index="{{index}}" name="{{item['label']}}_渲染" mode="selector" value="{{item['valueIndex']}}" bindchange="绑定单个下拉选择框" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}" range-key="{{'label'}}" range="{{item['options']}}" data-range="{{item['options']}}" data-fieldlist="{{FieldListArray}}"
+                data-relativeupadte="{{item['关联更新']}}" data-relativejsonfilter="{{liebiao[index+1]['Json过滤']}}" data-ismustvalue="{{item['rules']['required']}}" disabled="{{item['rules']['disabled']}}">
+                    <view class="picker">
+                        {{item.chooseName ? item.chooseName : data[item['name']]=='' || data[item['name']]==undefined ? '请选择' : data[item['name']]}}
+                    </view>
+                </picker>
+                <input style="text-align:right" name="{{item['name']}}" value="{{item.chooseName ? item.chooseName : data[item['name']]}}" hidden='true' maxlength='500' />
+            </view>
+            <view class="editElementRightIcon" wx:if="{{!(item['FieldCheckResult']==undefined)}}">
+                <image class="IcampusViewPageRowRightIcon" src="{{((item['FieldCheckResult']==undefined)&&item['rules']['required']==true)?'':item['FieldCheckResult']}}" />
+            </view>
+            </view>
+        </view>
+
+        <!--autocomplete-->
+        <view class="section" wx:if="{{item['type']==='autocomplete'}}">
+            <view class="editElementLeft">
+            {{item['label']}}
+            <text style="color:red;margin-left:6rpx;" wx:if="{{item['rules']['required']}}">{{item['rules']['required']==true?'*':''}}</text>
+            <text style="color:#17c3c9;font-size:20rpx;" wx:if="{{item['helptext']!='' && item['helptext']!=undefined}}">({{item['helptext']}})</text>
+            </view>
+            <view style="display:flex;align-items:center;">
+            <view class="editElementRight">
+                <picker data-index="{{index}}" name="{{item['label']}}_渲染" mode="selector" value="{{item['valueIndex']}}" bindchange="绑定单个下拉选择框" data-code="{{item['code']}}" data-name="{{item['name']}}" data-id="{{index}}" id="{{index}}" range-key="{{'label'}}" range="{{item['options']}}" data-range="{{item['options']}}" data-fieldlist="{{FieldListArray}}"
+                data-relativeupadte="{{item['关联更新']}}" data-relativejsonfilter="{{liebiao[index+1]['Json过滤']}}" data-ismustvalue="{{item['rules']['required']}}" disabled="{{item['rules']['disabled']}}">
+                    <view class="picker">
+                        {{item.chooseName ? item.chooseName :
+                        (data[item['name']]!='' && data[item['name']]!=undefined) ? data[item['name']] :
+                        (data[item['code']]=='' || data[item['code']]==undefined) ? '请选择' : data[item['code']]
+                         }}
+                    </view>
+                </picker>
+                <input style="text-align:right" wx:if="{{item['name']==item['code']}}" name="{{item['code']}}" value="{{item.chooseName ? item.chooseName : data[item['code']]}}" hidden='true' maxlength='500' />
+                <input style="text-align:right" wx:if="{{item['name']!=item['code']}}" name="{{item['name']}}" value="{{item.chooseName ? item.chooseName : data[item['name']]}}" hidden='true' maxlength='500' />
+                <input style="text-align:right" wx:if="{{item['name']!=item['code']}}" name="{{item['code']}}" value="{{item.chooseNameCode ? item.chooseNameCode : data[item['code']]}}" hidden='true' maxlength='500' />
+            </view>
+            <view class="editElementRightIcon" wx:if="{{!(item['FieldCheckResult']==undefined)}}">
+                <image class="IcampusViewPageRowRightIcon" src="{{((item['FieldCheckResult']==undefined)&&item['rules']['required']==true)?'':item['FieldCheckResult']}}" />
+            </view>
+            </view>
+        </view>
+
+        <!--radiogroup-->
+        <view class="sectionbr" wx:if="{{item['type']=='radiogroup' || item['type']=='radiogroupcolor'}}">
+            <view class="editElementTop">
+            {{item['label']}}
+            <text style="color:red;margin-left:6rpx;" wx:if="{{item['rules']['required']}}">{{item['rules']['required']==true?'*':''}}</text>
+            <text style="color:#17c3c9;font-size:20rpx;" wx:if="{{item['helptext']!='' && item['helptext']!=undefined}}">({{item['helptext']}})</text>
+            </view>
+            <view style="display:flex;align-items:center;">
+            <view class="editElementDown">
+                <radio-group bindchange="绑定单个RADIO选择框" class="radioGroup" disabled="false" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}" range="{{item['options']}}" data-range="{{item['options']}}">
+                    <radio data-index="{{index}}"  value="{{index}}" name="{{item['label']}}_渲染" class="radio" color="#17c3c9" wx:for="{{item['options']}}" wx:for-item="optionItem" wx:key="optionKey" checked="{{data[item['name']]==optionItem.value ? true:false}}" disabled="false" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}" range="{{item['options']}}" data-range="{{item['options']}}" data-fieldlist="{{FieldListArray}}"
+                    data-ismustvalue="{{item['rules']['required']}}" disabled="{{item['rules']['disabled']}}">
+                        <view class="radioCont">
+                            <text>{{optionItem.label}}</text>
+                        </view>
+                    </radio>
+                </radio-group>
+                <input style="text-align:right" name="{{item['name']}}" value="{{item.chooseName ? item.chooseName : data[item['name']]}}" hidden='true' maxlength='500' />
+            </view>
+            </view>
+        </view>
+
+        <view class="sectionbr" wx:if="{{item['type']==='checkbox'}}">
+            <view class="editElementLeft">
+            {{item['label']}}
+            <text style="color:red;margin-left:6rpx;" wx:if="{{item['rules']['required']}}">{{item['rules']['required']==true?'*':''}}</text>
+            <text style="color:#17c3c9;font-size:20rpx;" wx:if="{{item['helptext']!='' && item['helptext']!=undefined}}">({{item['helptext']}})</text>
+            </view>
+            <view style="display:flex;align-items:center;">
+            <view class="editElementRight">
+                <checkbox-group data-index="{{index}}" bindchange="点击多选控件" data-value="{{checkedbox.value}}" data-id="{{index}}" id="{{index}}" data-name="{{item['label']}}" data-ismustvalue="{{item['rules']['required']}}" disabled="{{item['rules']['disabled']}}">
+                <label class="checkbox" wx:for="{{item['选项']}}" wx:for-item="checkedbox" wx:key="X" style="display:inline-block;margin-left:20rpx;">
+                    <checkbox value="{{checkedbox.value}}" checked="{{checkedbox.checked}}"  style="margin:6rpx;width: 60rpx;" disabled="{{item['rules']['disabled']}}"/>
+                    <view style="width:200rpx;line-height:60rpx;display:inline-block;">{{checkedbox.value}}</view>
+                </label>
+                </checkbox-group>
+                <input style="text-align:right" name="{{item['label']}}" value="{{data[item['name']]}}" hidden='true' maxlength='500' />
+            </view>
+            </view>
+        </view>
+
+        <!--循环两列SELECT类型的数据,有如用户信息,班级的学生信息,积分的分组和明细信息等单个下拉框. -->
+        <view class="section" wx:if="{{item['type']==='jumpwindow'}}">
+            <view class="editElementLeft">
+            {{item['label']}}
+            <text style="color:red;margin-left:6rpx;" wx:if="{{item['rules']['required']}}">{{item['rules']['required']==true?'*':''}}</text>
+            <text style="color:#17c3c9;font-size:20rpx;" wx:if="{{item['helptext']!='' && item['helptext']!=undefined}}">({{item['helptext']}})</text>
+            </view>
+            <view style="display:flex;align-items:center;">
+            <view class="editElementRight">
+                <picker data-index="{{index}}" name="{{item['label']}}_渲染" mode="multiSelector" value="{{item['微信小程序_用户答案_INDEX']}}" bindchange="绑定二级下拉选择框" bindcolumnchange="绑定二级下拉选择框_列改变" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}" range="{{item['微信小程序_左右下拉数组']}}" data-value="{{item['微信小程序_用户答案_INDEX']}}"
+                data-answer="{{data[item['name']]}}" data-alldata="{{item['子选项']}}" data-range="{{item['微信小程序_左右下拉数组']}}" data-fieldlist="{{FieldListArray}}" data-ismustvalue="{{item['rules']['required']}}">
+                <view class="picker">
+                    {{item['微信小程序_左右下拉数组'][1][item['微信小程序_用户答案_INDEX'][1]]}}
+                </view>
+                </picker>
+                <input name="{{item['label']}}" value="{{data[item['name']]}}" hidden='true' maxlength='500' />
+            </view>
+            <view class="editElementRightIcon" wx:if="{{!(item['FieldCheckResult']==undefined)}}">
+                <image class="IcampusViewPageRowRightIcon" src="{{((item['FieldCheckResult']==undefined)&&item['rules']['required']==true)?'':item['FieldCheckResult']}}" />
+            </view>
+            </view>
+        </view>
+
+        <!--循环三列SELECT类型的数据,省市区使用到. -->
+        <view class="section" wx:if="{{item['type']==='ProvinceAndCity'}}">
+            <view class="editElementLeft">
+            {{item['label']}}
+            <text style="color:red;margin-left:6rpx;" wx:if="{{item['rules']['required']}}">{{item['rules']['required']==true?'*':''}}</text>
+            <text style="color:#17c3c9;font-size:20rpx;" wx:if="{{item['helptext']!='' && item['helptext']!=undefined}}">({{item['helptext']}})</text>
+            </view>
+            <view style="display:flex;align-items:center;">
+            <view class="editElementRight">
+                <picker data-index="{{index}}" name="{{item['label']}}_渲染" mode="multiSelector" value="{{item['微信小程序_用户答案_INDEX']}}" bindchange="绑定二级下拉选择框" bindcolumnchange="绑定三级下拉选择框_列改变" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}" range="{{item['微信小程序_左右下拉数组']}}" data-value="{{item['微信小程序_用户答案_INDEX']}}"
+                data-answer="{{data[item['name']]}}" data-range="{{item['微信小程序_左右下拉数组']}}" data-alldata="{{item['子选项']}}" data-fieldlist="{{FieldListArray}}" data-ismustvalue="{{item['rules']['required']}}">
+                <view class="picker">
+                    {{item['微信小程序_左右下拉数组'][0][item['微信小程序_用户答案_INDEX'][0]]}} {{item['微信小程序_左右下拉数组'][1][item['微信小程序_用户答案_INDEX'][1]]}} {{item['微信小程序_左右下拉数组'][2][item['微信小程序_用户答案_INDEX'][2]]}}
+                </view>
+                </picker>
+                <input name="{{item['label']}}" value="{{data[item['name']]}}" hidden='true' maxlength='500' />
+            </view>
+            <view class="editElementRightIcon" wx:if="{{!(item['FieldCheckResult']==undefined)}}">
+                <image class="IcampusViewPageRowRightIcon" src="{{((item['FieldCheckResult']==undefined)&&item['rules']['required']==true)?'':item['FieldCheckResult']}}" />
+            </view>
+            </view>
+        </view>
+
+        <!--循环单个上传图片类型的数据,如上传头像,单个图片等,不能上传除图片以外的文件格式. -->
+        <view wx:if="{{item['type']==='images'}}" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}">
+            <view class="editElementLeft imgTitle">
+            {{item['label']}}
+            <text style="color:red;margin-left:6rpx;" wx:if="{{item['rules']['required']}}">{{item['rules']['required']==true?'*':''}}</text>
+            <text style="color:#17c3c9;font-size:20rpx;" wx:if="{{item['helptext']!='' && item['helptext']!=undefined}}">({{item['helptext']}})</text>
+            </view>
+            <!-- <view style="display:flex;align-items:center;"> -->
+            <view class="imgListBox">
+            <block data-index="{{index}}" wx:for="{{data[item['name']]}}" wx:key="image_row" wx:for-item="item_image">
+                <image class="IcampusViewPage" src="{{item_image['url']}}" background-size="cover" memo="{{item_image['status']}}" data-name="{{item['label']}}" data-id="{{index}}" data-url="{{item_image['url']}}" data-allimagelist="{{item['微信小程序_图片列表']}}" id="{{index}}"
+                bindtap='图片放大'></image>
+            </block>
+            <view class='chooseimg' bindtap='上传多个图片' wx:if="{{data[item['name']].length<item['行数']&&item['只读']!='是'}}" data-id="{{index}}" data-alluseranswer="{{data[item['name']]}}" data-allimagelist="{{item['微信小程序_图片列表']}}" data-tdoafileformatvalue="{{item['微信小程序_通达OA附件格式']}}" data-ismustvalue="{{item['rules']['required']}}"
+                style="display:inline-block;">
+                <view class="weui-uploader__input-box"></view>
+            </view>
+            <input name="{{item['label']}}" value="{{item['微信小程序_通达OA附件格式']}}" hidden='true' maxlength='36000' />
+            </view>
+            <!-- <view class="editElementRightIcon"></view> -->
+            <!-- </view> -->
+        </view>
+
+        <!--file. -->
+        <view wx:if="{{item['type']==='file'}}" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}">
+            <view class="editElementLeft imgTitle">
+            {{item['label']}}
+            <text style="color:red;margin-left:6rpx;" wx:if="{{item['rules']['required']}}">{{item['rules']['required']==true?'*':''}}</text>
+            <text style="color:#17c3c9;font-size:20rpx;" wx:if="{{item['helptext']!='' && item['helptext']!=undefined}}">({{item['helptext']}})</text>
+            </view>
+            <view class="imgListBox">
+            <block data-index="{{index}}" wx:for="{{data[item['name']]}}" wx:key="image_row" wx:for-item="item_image">
+                <image class="IcampusViewPage" src="{{item_image['typeicon']}}" background-size="cover" memo="{{item_image['status']}}" data-name="{{item['label']}}" data-id="{{index}}" data-url="{{item_image['url']}}" data-filetype="{{item_image['filetype']}}" data-allimagelist="{{item['微信小程序_图片列表']}}"
+                id="{{index}}" bindtap='附件下载'></image>
+            </block>
+            <view class='chooseimg' bindtap='上传多个图片' wx:if="{{data[item['name']].length<item['行数']&&item['只读']!='是'}}" data-id="{{index}}" data-alluseranswer="{{data[item['name']]}}" data-allimagelist="{{item['微信小程序_图片列表']}}" data-tdoafileformatvalue="{{item['微信小程序_通达OA附件格式']}}" data-ismustvalue="{{item['rules']['required']}}" style="display:inline-block;">
+                <view class="weui-uploader__input-box"></view>
+            </view>
+            <input name="{{item['label']}}" value="{{item['微信小程序_通达OA附件格式']}}" hidden='true' maxlength='36000' />
+            </view>
+            <!-- <view class="editElementRightIcon"></view> -->
+        </view>
+
+        <!--files. -->
+        <view wx:if="{{item['type']==='files'}}" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}">
+            <view class="editElementLeft imgTitle">
+            {{item['label']}}
+            <text style="color:red;margin-left:6rpx;" wx:if="{{item['rules']['required']}}">{{item['rules']['required']==true?'*':''}}</text>
+            <text style="color:#17c3c9;font-size:20rpx;" wx:if="{{item['helptext']!='' && item['helptext']!=undefined}}">({{item['helptext']}})</text>
+            </view>
+            <view class="imgListBox">
+            <block data-index="{{index}}" wx:for="{{data[item['name']]}}" wx:key="image_row" wx:for-item="item_image">
+                <image class="IcampusViewPage" src="{{item_image['typeicon']}}" background-size="cover" memo="{{item_image['status']}}" data-name="{{item['label']}}" data-id="{{index}}" data-url="{{item_image['url']}}" data-filetype="{{item_image['filetype']}}" data-allimagelist="{{item['微信小程序_图片列表']}}"
+                id="{{index}}" bindtap='附件下载'></image>
+            </block>
+            <view class='chooseimg' bindtap='上传多个图片' wx:if="{{data[item['name']].length<item['行数']&&item['只读']!='是'}}" data-id="{{index}}" data-alluseranswer="{{data[item['name']]}}" data-allimagelist="{{item['微信小程序_图片列表']}}" data-tdoafileformatvalue="{{item['微信小程序_通达OA附件格式']}}" data-ismustvalue="{{item['rules']['required']}}" style="display:inline-block;">
+                <view class="weui-uploader__input-box"></view>
+            </view>
+            <input name="{{item['label']}}" value="{{item['微信小程序_通达OA附件格式']}}" hidden='true' maxlength='36000' />
+            </view>
+            <!-- <view class="editElementRightIcon"></view> -->
+        </view>
+
+        <!--readonlyfiles. -->
+        <view wx:if="{{item['type']==='readonlyfiles'}}" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}">
+            <view class="editElementLeft imgTitle">
+            {{item['label']}}
+            <text style="color:red;margin-left:6rpx;">{{item['rules']['required']==true?'*':''}}</text>
+            </view>
+            <view class="imgListBox">
+            <block data-index="{{index}}" wx:for="{{data[item['name']]}}" wx:key="image_row" wx:for-item="item_image">
+                <image class="IcampusViewPage" src="{{item_image['typeicon']}}" background-size="cover" memo="{{item_image['status']}}" data-name="{{item['label']}}" data-id="{{index}}" data-url="{{item_image['url']}}" data-filetype="{{item_image['filetype']}}" data-allimagelist="{{item['微信小程序_图片列表']}}"
+                id="{{index}}" bindtap='附件下载'></image>
+            </block>
+            <view class='chooseimg' bindtap='上传多个图片' wx:if="{{data[item['name']].length<item['行数']&&item['只读']!='是'}}" data-id="{{index}}" data-alluseranswer="{{data[item['name']]}}" data-allimagelist="{{item['微信小程序_图片列表']}}" data-tdoafileformatvalue="{{item['微信小程序_通达OA附件格式']}}" data-ismustvalue="{{item['rules']['required']}}" style="display:inline-block;">
+                <view class="weui-uploader__input-box"></view>
+            </view>
+            <input name="{{item['label']}}" value="{{item['微信小程序_通达OA附件格式']}}" hidden='true' maxlength='36000' />
+            </view>
+            <!-- <view class="editElementRightIcon"></view> -->
+        </view> 
+
+        <!--avatar. -->
+        <view wx:if="{{item['type']==='avatar'}}" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}">
+            <view class="editElementLeft imgTitle">
+            {{item['label']}}
+            <text style="color:red;margin-left:6rpx;" wx:if="{{item['rules']['required']}}">{{item['rules']['required']==true?'*':''}}</text>
+            <text style="color:#17c3c9;font-size:20rpx;" wx:if="{{item['helptext']!='' && item['helptext']!=undefined}}">({{item['helptext']}})</text>
+            </view>
+            <view class="imgListBox">
+            <block data-index="{{index}}" wx:for="{{data[item['name']]}}" wx:key="image_row" wx:for-item="item_image">
+                <image class="IcampusViewPage" src="{{item_image['typeicon']}}" background-size="cover" memo="{{item_image['status']}}" data-name="{{item['label']}}" data-id="{{index}}" data-url="{{item_image['url']}}" data-filetype="{{item_image['filetype']}}" data-allimagelist="{{item['微信小程序_图片列表']}}"
+                id="{{index}}" bindtap='附件下载'></image>
+            </block>
+            <view class='chooseimg' bindtap='上传多个图片' wx:if="{{data[item['name']].length<item['行数']&&item['只读']!='是'}}" data-id="{{index}}" data-alluseranswer="{{data[item['name']]}}" data-allimagelist="{{item['微信小程序_图片列表']}}" data-tdoafileformatvalue="{{item['微信小程序_通达OA附件格式']}}" data-ismustvalue="{{item['rules']['required']}}" style="display:inline-block;">
+                <view class="weui-uploader__input-box"></view>
+            </view>
+            <input name="{{item['label']}}" value="{{item['微信小程序_通达OA附件格式']}}" hidden='true' maxlength='36000' />
+            </view>
+            <!-- <view class="editElementRightIcon"></view> -->
+        </view> 
+
+        <!--readonlyavatar. -->
+        <view wx:if="{{item['type']==='readonlyavatar'}}" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}">
+            <view class="editElementLeft imgTitle">
+            {{item['label']}}
+            <text style="color:red;margin-left:6rpx;">{{item['rules']['required']==true?'*':''}}</text>
+            </view>
+            <view class="imgListBox">
+            <block data-index="{{index}}" wx:for="{{data[item['name']]}}" wx:key="image_row" wx:for-item="item_image">
+                <image class="IcampusViewPage" src="{{item_image['typeicon']}}" background-size="cover" memo="{{item_image['status']}}" data-name="{{item['label']}}" data-id="{{index}}" data-url="{{item_image['url']}}" data-filetype="{{item_image['filetype']}}" data-allimagelist="{{item['微信小程序_图片列表']}}"
+                id="{{index}}" bindtap='附件下载'></image>
+            </block>
+            <view class='chooseimg' bindtap='上传多个图片' wx:if="{{data[item['name']].length<item['行数']&&item['只读']!='是'}}" data-id="{{index}}" data-alluseranswer="{{data[item['name']]}}" data-allimagelist="{{item['微信小程序_图片列表']}}" data-tdoafileformatvalue="{{item['微信小程序_通达OA附件格式']}}" data-ismustvalue="{{item['rules']['required']}}" style="display:inline-block;">
+                <view class="weui-uploader__input-box"></view>
+            </view>
+            <input name="{{item['label']}}" value="{{item['微信小程序_通达OA附件格式']}}" hidden='true' maxlength='36000' />
+            </view>
+            <!-- <view class="editElementRightIcon"></view> -->
+        </view> 
+
+        <!--slider. -->
+        <view class="section" wx:if="{{item['type']=='slider'}}">
+            <view class="editElementLeft">
+            {{item['label']}}
+            <text style="color:red;margin-left:6rpx;" wx:if="{{item['rules']['required']}}">{{item['rules']['required']==true?'*':''}}</text>
+            <text style="color:#17c3c9;font-size:20rpx;" wx:if="{{item['helptext']!='' && item['helptext']!=undefined}}">({{item['helptext']}})</text>
+            </view>
+            <view style="display:flex;align-items:center;">
+            <view class="editElementRight">
+                <input data-index="{{index}}" style="text-align:right" type="{{(item['mobilekeyboard']==''||item['mobilekeyboard']==undefined)?'text':item['mobilekeyboard']}}" name="{{item['label']}}" touchend="resetBtnClick" bindinput="{{item['校验']}}" focus="{{item['FormFocus']}}" placeholder="{{(item['placeholder']==''||item['placeholder']==undefined)?'请输入'+item['label']:item['placeholder']}}"
+                value="{{data[item['name']]}}" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}" data-fieldlist="{{FieldListArray}}" data-value="{{data[item['name']]}}" data-ismustvalue="{{item['rules']['required']}}"  data-userdefinejsfunction="{{item['自定义JS函数']}}" placeholder-style="color:#999;" maxlength='500' data-liebiao="{{liebiao}}"/>
+            </view>
+            <view class="editElementRightIcon" wx:if="{{!(item['FieldCheckResult']==undefined)}}">
+                <image class="IcampusViewPageRowRightIcon" src="{{((item['FieldCheckResult']==undefined)&&item['rules']['required']==true)?'':item['FieldCheckResult']}}" />
+            </view>
+            </view>
+        </view>
+
+        <!--Switch. -->
+        <view class="section" wx:if="{{item['type']=='Switch'}}">
+            <view class="editElementLeft">
+            {{item['label']}}
+            <text style="color:red;margin-left:6rpx;" wx:if="{{item['rules']['required']}}">{{item['rules']['required']==true?'*':''}}</text>
+            <text style="color:#17c3c9;font-size:20rpx;" wx:if="{{item['helptext']!='' && item['helptext']!=undefined}}">({{item['helptext']}})</text>
+            </view>
+            <view style="display:flex;align-items:center;">
+            <view class="editElementRight">
+                <input data-index="{{index}}" style="text-align:right" type="{{(item['mobilekeyboard']==''||item['mobilekeyboard']==undefined)?'text':item['mobilekeyboard']}}" name="{{item['label']}}" touchend="resetBtnClick" bindinput="{{item['校验']}}" focus="{{item['FormFocus']}}" placeholder="{{(item['placeholder']==''||item['placeholder']==undefined)?'请输入'+item['label']:item['placeholder']}}"
+                value="{{data[item['name']]}}" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}" data-fieldlist="{{FieldListArray}}" data-value="{{data[item['name']]}}" data-ismustvalue="{{item['rules']['required']}}"  data-userdefinejsfunction="{{item['自定义JS函数']}}" placeholder-style="color:#999;" maxlength='500' data-liebiao="{{liebiao}}"/>
+            </view>
+            <view class="editElementRightIcon" wx:if="{{!(item['FieldCheckResult']==undefined)}}">
+                <image class="IcampusViewPageRowRightIcon" src="{{((item['FieldCheckResult']==undefined)&&item['rules']['required']==true)?'':item['FieldCheckResult']}}" />
+            </view>
+            </view>
+        </view>
+
+        <!--缴费-微信支付 -->
+        <view class="section" wx:if="{{item['type']=='WechatPayment'&&item['只读']!='是'&&item['行数']<=2}}">
+            <view class="editElementLeft">
+                {{item['label']}}
+                <text style="color:#17c3c9;font-size:20rpx;">(只读)</text>
+                <text style="color:red;margin-left:6rpx;" wx:if="{{item['rules']['required']}}">{{item['rules']['required']==true?'*':''}}</text>
+                <text style="color:#17c3c9;font-size:20rpx;" wx:if="{{item['helptext']!='' && item['helptext']!=undefined}}">({{item['helptext']}})</text>
+            </view>
+            <view class="editElementRight">
+                <input data-index="{{index}}" type="{{(item['mobilekeyboard']==''||item['mobilekeyboard']==undefined)?'text':item['mobilekeyboard']}}" name="{{item['label']}}" touchend="resetBtnClick" bindinput="微信支付" focus="{{item['FormFocus']}}" placeholder="{{(item['placeholder']==''||item['placeholder']==undefined)?'请输入'+item['label']:item['placeholder']}}"
+                value="{{data[item['name']]}}" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}" data-fieldlist="{{FieldListArray}}" data-value="{{data[item['name']]}}" data-ismustvalue="{{item['rules']['required']}}" placeholder-style="color:#999;" maxlength='500' />
+            </view>
+            <view class="editElementRightIcon" wx:if="{{!(item['FieldCheckResult']==undefined)}}">
+                <image class="IcampusViewPageRowRightIcon" src="{{((item['FieldCheckResult']==undefined)&&item['rules']['required']==true)?'':item['FieldCheckResult']}}" />
+            </view>
+        </view>
+        <!--缴费-微信支付 -->
+        <view class="section readonly " wx:if="{{item['type']=='WechatPayment'&&item['只读']=='是'}}">
+            <view class="editElementLeft">
+                {{item['label']}}
+                <text style="color:red;margin-left:6rpx;" wx:if="{{item['rules']['required']}}">{{item['rules']['required']==true?'*':''}}</text>
+                <text style="color:#17c3c9;font-size:20rpx;" wx:if="{{item['helptext']!='' && item['helptext']!=undefined}}">({{item['helptext']}})</text>
+            </view>
+            <view>
+                <view class="editElementRight">{{data[item['name']]}}</view>
+                <view class="editElementRightIcon"></view>
+                <input data-index="{{index}}" type="text" name="{{item['label']}}" value="{{data[item['name']]}}" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}" hidden='true' data-fieldlist="{{FieldListArray}}" data-ismustvalue="{{item['rules']['required']}}" maxlength='500' />
+            </view>
+        </view>
+
+        <!--地理位置数据,只能一个当前地理位置的标签. -->
+        <view class="section city" wx:if="{{item['type']==='location'}}" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}">
+            <view>
+            {{item['label']}}
+            <text style="color:red;margin-left:6rpx;">{{item['rules']['required']==true?'*':''}}</text>
+            </view>
+            <input data-index="{{index}}" name="{{item['label']}}" value='{{location}}' data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}" class="{{item.class}}" disabled='true' data-fieldlist="{{FieldListArray}}" data-ismustvalue="{{item['rules']['required']}}" />
+            <input name="{{item['label']}}详细数据" value='{{hiddenaddress}}' hidden='true' data-ismustvalue="{{item['rules']['required']}}" />
+            <input name="{{item['label']}}" value="{{data[item['name']]}}" hidden='true' />
+        </view>
+
+        <!--弹出多选控件. -->
+        <!-- <view class="section" wx:if="{{item['type']=='弹出多选'&&item['只读']!='是'}}" style="height:{{(item['微信小程序_弹出多选高度']==''||item['微信小程序_弹出多选高度']==undefined)?100:item['微信小程序_弹出多选高度']}}rpx;">
+            <view class="editElementLeft">{{item['label']}}{{item['rules']['required']==true?'*':''}}：</view>
+            <view class="editElementRight">
+            <view class="multi-select-popup" bindtap="弹出多选窗口" wx:if="{{!item['DisabledJumpMultiChoice']}}" data-alldata="{{item['微信小程序_全部数组结构']}}" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}">弹出多选窗口</view>
+            <block wx:for="{{item['微信小程序_已选数组结构']}}" wx:key="multi_row" wx:for-item="multi_item" wx:for-index="multi_index">
+                <view class="multi-selected-name" data-id="{{index}}" id="{{index}}" bindtap="弹出多选窗口_删除某一个记录时的弹出窗" data-studentinfo="{{multi_item}}" data-deleteindex="{{multi_index}}" data-classid="{{multi_item.classid}}" data-studentid="{{multi_item.studentid}}" data-allselected="{{item['微信小程序_已选数组结构']}}" data-height="{{item['微信小程序_弹出多选高度']}}">
+                <image src="../../images/man.png" style="width:36rpx;height:36rpx;vertical-align:middle;margin-right:10rpx;"></image>
+                <text>{{ multi_item.studentname==multi_item.studentid ? multi_item.studentname : multi_item.studentname+' '+multi_item.studentid }}</text>
+                </view>
+            </block>
+            </view>
+            <view class="editElementRightIcon">
+            <image class="IcampusViewPageRowRightIcon" src="{{((item['FieldCheckResult']==undefined)&&item['rules']['required']==true)?'../../images/must01.png':item['FieldCheckResult']}}"/>
+            <input name="{{item['label']}}" value="{{item['用户答案ID列表']}}" hidden='true' maxlength='5000'/>
+            </view>
+        </view>  -->
+
+        <view wx:if="{{item['type']=='autocompletemulti'&&item['只读']!='是'}}">
+            <view class="editElementLeft imgTitle">
+            {{item['label']}}
+            <text style="color:red;margin-left:6rpx;" wx:if="{{item['rules']['required']}}">{{item['rules']['required']==true?'*':''}}</text>
+            <text style="color:#17c3c9;font-size:20rpx;" wx:if="{{item['helptext']!='' && item['helptext']!=undefined}}">({{item['helptext']}})</text>
+            </view>
+            <view class="kongjian" style="height:{{(item['微信小程序_弹出多选高度']==''||item['微信小程序_弹出多选高度']==undefined)?100:item['微信小程序_弹出多选高度']}}rpx;">
+            <view>
+                <block data-index="{{index}}" wx:for="{{item['微信小程序_已选数组结构']}}" wx:key="multi_row" wx:for-item="multi_item" wx:for-index="multi_index">
+                <view class="multi-selected-name" data-id="{{index}}" id="{{index}}" bindtap="弹出多选窗口_删除某一个记录时的弹出窗" data-studentinfo="{{multi_item}}" data-deleteindex="{{multi_index}}" data-classid="{{multi_item.classid}}" data-studentid="{{multi_item.studentid}}" data-allselected="{{item['微信小程序_已选数组结构']}}"
+                    data-height="{{item['微信小程序_弹出多选高度']}}">
+                    <image src="../../images/man.png"></image>
+                    <block wx:if="{{multi_item.studentname==multi_item.studentid}}">
+                    <view style="560rpx; text-overflow: ellipsis;overflow: hidden;height: 53rpx;">
+                        <text>{{multi_item.studentname}}</text>
+                    </view>
+                    </block>
+                    <block wx:else>
+                    <view style="display:flex;height:60rpx;line-height:60rpx;">
+                        <view style="width:200rpx;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">
+                        <text>{{multi_item.studentname}}</text>
+                        </view>
+                        <view style="width:150rpx;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;">
+                        <text>{{multi_item.studentid}}</text>
+                        </view>
+                    </view>
+                    </block>
+                    <!-- <text>{{ multi_item.studentname==multi_item.studentid ? multi_item.studentname : multi_item.studentname+' '+multi_item.studentid }}</text> -->
+                </view>
+                </block>
+            </view>
+
+            <view class="multi-select-popup" bindtap="弹出多选窗口" wx:if="{{!item['DisabledJumpMultiChoice']}}" data-alldata="{{item['微信小程序_全部数组结构']}}" data-name="{{item['label']}}" data-id="{{index}}" id="{{index}}">
+                <image src="../../images/popup.png" style="width:50rpx;height:50rpx;"></image>
+                <!--只能指定一个INPUT的名称,不能指定追加ID的字段的名称,不然会影响到系统使用.-->
+                <input data-index="{{index}}" name="{{item['label']}}" value="{{item['用户答案ID列表']}}" hidden='true' maxlength='5000' />
+            </view>
+            </view>
+            <view class="editElementRightIcon" wx:if="{{!(item['FieldCheckResult']==undefined)}}">
+            <image class="IcampusViewPageRowRightIcon" src="{{((item['FieldCheckResult']==undefined)&&item['rules']['required']==true)?'':item['FieldCheckResult']}}" />
+            </view>
+        </view>
+
+    </block>
+
+    <view class="btn-area" wx:if="{{formsubmit==1 && liebiao.length>0}}">
+      <button class="{{isFormSubmitButtonClass}}" disabled="{{isFormSubmitButtonDisabled}}" formType="submit" id='formSubmitButton' data-allfieldlist="{{allfieldlist}}" data-allmustfieldlist="{{allmustfieldlist}}" data-submiturl="{{submiturl}}" data-submitaction="{{isFormSubmitButtonValue}}" data-submitcurrentid="{{submitcurrentid}}" data-submitcurrentpayfield="{{submitcurrentpayfield}}" data-submitcurrentform="{{submitcurrentform}}" data-submitcurrentformchinese="{{submitcurrentformchinese}}" data-liebiao="{{liebiao}}" data-fieldlist="{{FieldListArray}}" >{{isFormSubmitButtonValue}}</button>
+    </view>
+
+  </form>
+</view>
+
+<!--
+    <view class="section sec-pr">
+      <picker bindchange="CheckIDCardType" value="{{CheckIDCardIndex}}" name="type" range="{{CheckIDCardArray}}" data-range="{{CheckIDCardArray}}">
+        <view class="pickerx">
+          居民身份证件类型：{{CheckIDCardArray[CheckIDCardIndex]}}
+        </view>
+      </picker>      
+    </view>
+    <view class="section">
+      <view>居民身份证件号码：</view>
+      <input type="text" name="身份证件号码" id="{{IdCardNumberType}}" bindblur="CheckIDCardAndSysInfor" class='IdCardCss_notuse' value='{{IdCardInfor.number}}'/>
+    </view>
+    <view class="section {{IdCardInfor.css}}">
+      <view>出生年月：</view>
+      <input type="text" name="出生年月" placeholder="出生年月" value="{{IdCardInfor.yearmonth}}" disabled='{{IdCardInforDisabled.yearmonth ? true:false}}' class='{{IdCardInforDisabled.css}}'/>
+    </view>
+    <view class="section {{IdCardInfor.css}}">
+      <view>出生日期：</view>
+      <input type="text" name="出生日期" placeholder="出生日期" value="{{IdCardInfor.birthday}}"  disabled='{{IdCardInforDisabled.birthday ? true:false}}' class='{{IdCardInforDisabled.css}}'/>
+    </view>
+    <view class="section {{IdCardInfor.css}}">
+      <view>年龄：</view>
+      <input type="text" name="年龄" placeholder="年龄" value="{{IdCardInfor.age}}"  disabled='{{IdCardInforDisabled.age ? true:false}}' class='{{IdCardInforDisabled.css}}'/>
+    </view>
+    <view class="section {{IdCardInfor.css}}">
+      <view>性别：</view>    
+      <input type="text" name="性别" placeholder="性别" value="{{IdCardInfor.gendar}}"  disabled='{{IdCardInforDisabled.gendar ? true:false}}' class='{{IdCardInforDisabled.css}}'/>
+    </view>
+
+    -->

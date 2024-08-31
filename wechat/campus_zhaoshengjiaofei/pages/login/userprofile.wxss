@@ -1,0 +1,82 @@
+page {
+  background: #f8f8f8;
+  margin-top: 20rpx;
+}
+
+.section{
+  width: 670rpx;
+  height: 100rpx;
+  line-height: 100rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1rpx #f8f8f8 solid;
+  padding: 0 20rpx;
+  font-size: 32rpx;
+  background: #fff;
+  color: #666;
+  margin: 0 auto;
+}
+
+.btn-area {
+  display: flex;
+  justify-content: center;
+}
+
+.button {
+  text-align: center;
+  color: #fc0;
+  background-color: #fff;
+  font-size: 32rpx;
+  padding: 0;
+  width: 690rpx;
+}
+button::after{
+  border: none;
+}
+
+.elementsection image{
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.userinfo{
+  padding: 30rpx 20rpx;
+  background: #fff;
+  color: #333;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.userinfo .user{
+  display: flex;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  display: block;
+  width: 100rpx;
+  height: 100rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  border:2px solid #fff;
+  box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
+}
+
+.userinfo-nickname {
+  color: #fff;
+  font-size: 14px;
+}
+/* .userinfodetail{
+  height: 50rpx;
+  line-height: 50rpx;
+  width: 150rpx;
+  padding-left: 30rpx;
+  background-image: linear-gradient(120deg, #46eeeb 20%, #17c3c9 80%);
+  border-top-left-radius: 30rpx;
+  border-bottom-left-radius: 30rpx;
+  margin-right: -20rpx;
+  color: #fff;
+  font-size: 28rpx;
+} */

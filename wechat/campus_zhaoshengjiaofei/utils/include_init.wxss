@@ -1,0 +1,76 @@
+.sx1{overflow: hidden;height: auto;}
+.sx1 view{float: left;}
+.ku-list .ku-item .sx1 .name{font-size: 24rpx;margin-left: 20rpx;line-height:40rpx;height:40rpx;}
+.nodatatrip{display: none;}
+
+.loading{  
+  /* padding-bottom: 10rpx;   */
+  text-align: center; 
+  font-size: 24rpx;
+  /* color: #666; */
+}  
+.loading:before{  
+  display: inline-block;  
+  margin-right: 5rpx;  
+  vertical-align: middle;  
+  content: '';  
+  width: 40rpx;  
+  height: 40rpx;   
+  background-size: contain;  
+  animation: rotate 1s linear infinite;  
+}  
+.loading.complete:before{  
+  display: none;  
+}  
+.search-show{
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+.search-show .line{
+  width: 8rpx;
+  height: 28rpx;
+  margin-right: 6rpx;
+  background: #17c3c9;
+  border-radius: 4rpx;
+  margin-left: 20rpx;
+}
+
+@import "include_addedit.wxss";
+
+
+/* 在 wxss 文件中 */
+.scroll-container {
+    overflow-x: auto;
+    white-space: nowrap;
+    background: #ffffff;
+}
+
+.scroll-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.scroll-content-item {
+    flex-shrink: 0; 
+    padding: 6px;
+    font-size: 26rpx;
+}
+
+.scroll-content-item-selected {
+    flex-shrink: 0; 
+    padding: 6px;
+    font-size: 26rpx;
+    font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,57 @@
+<!--数据-->
+<view class='container'>
+  <view class='itembg'>
+    <view class='indexbg'></view>
+  </view>
+
+  <view class='logo' wx:if="{{util.isArray(IndexLogo) && IndexLogo.length>0}}">
+    <image src='{{IndexLogo[0]}}' mode="widthFix"></image>
+  </view>
+
+  <view class="banner" wx:if="{{MainImageList.length>0}}">
+    <swiper indicator-dots='ture' autoplay='ture' indicator-color='#fff' indicator-active-color='#17c3c9' interval='5000' circular='ture'>
+      <block wx:for="{{MainImageList}}" wx:key="item">
+        <swiper-item>
+          <image src="{{SYSTEM_URL+item}}" class="slide-image" mode="Widthfix" />
+        </swiper-item>
+      </block>
+    </swiper>
+    <view class='img' wx:if="{{userInfoAvatar!=undefined && userInfoAvatar!=''}}">
+      <image src='{{userInfoAvatar}}' mode="widthFix"></image>
+    </view>
+    <view class='name' wx:if="{{nickName!=undefined && nickName!=''}}">{{nickName}}</view>
+  </view>
+
+  <!--引用的ID为当前模板下面的ID，而不是全局菜单中的ID-->
+  <!--还有一事需要注意:就是[新闻]和[通知]的第一个例子会分配给[学校新闻]和[通知公告]在TABBAR中使用,在主菜单图标中不能再次加入,如果加入,会在主菜单图标中点击会无效.另外,这个去除信息的写法只能在这个地方来写.如果在服务器上面直接把此信息去掉,会造成[学校新闻]和[通知公告]无法正确运行.-->
+  
+  
+  <block wx:for="{{indexmenuGroup}}" wx:key="indexmenuGroup" wx:for-item="groupItem">
+    <view class='indexmenu'>
+      <view class='MainDataRowTitle'><text class="line"></text><text>{{groupItem}}</text></view>
+      <block wx:for="{{indexmenu[groupItem]}}" wx:key="indexmenu">
+        <view class="itembg" wx:if="{{item.PageType=='FunctionPage'}}">
+          <view class='item' id='{{item.id}}' bindtap="点击单个图标跳转" data-ForceLogin="{{item.ForceLogin}}" data-url="/pages/InterfaceInit/{{item.ItemId}}" data-urluserdefine="{{item['UserDefineMobilePageUrl']}}">
+            <view class='img'>
+              <image src='{{SYSTEM_URL+item.Icon}}' mode="widthFix"></image>
+              <view class='meb' wx:if="{{item.Number>0}}">{{item.Number}}</view>
+            </view>
+            <text>{{item.Name}}</text>
+          </view>
+        </view>
+
+        <view class="itembg" wx:if="{{item.PageType=='WebPage'}}">
+          <view class='item' id='{{item.id}}' bindtap="点击单个图标跳转WEBPAGE" data-ForceLogin="{{item.ForceLogin}}" data-url="{{item.url}}">
+            <view class='img'>
+              <image src='{{item.Icon}}' mode="widthFix"></image>
+              <view class='meb' wx:if="{{item.Number>0}}">{{item.Number}}</view>
+            </view>
+            <text>{{item.Name}}</text>
+          </view>
+        </view>
+      </block>
+    </view>
+  </block>
+  
+
+</view>

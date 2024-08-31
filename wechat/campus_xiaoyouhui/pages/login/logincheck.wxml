@@ -1,0 +1,55 @@
+<!--数据-->
+<view class='container'>
+  <view class='itembg'>
+    <view class='indexbg'>
+    </view>
+  </view>
+
+  <view class='top-member' wx:if="{{IsUserAvator==true}}">
+      <view class='img'>
+        <image src='{{userInfoAvatar}}' mode="widthFix"></image>
+      </view>
+      <view class='name'>{{nickName}}</view>
+  </view>
+
+  <view class='logo_logincheck' wx:if="{{IndexLogo.length>0}}">
+    <image src='{{IndexLogo}}' mode="widthFix"></image>
+  </view>
+
+  <view class='IcampusLoginCheck'>
+    <form bindsubmit="绑定用户名或学号进行验证" bindreset="formReset">
+      <view class='radio'>
+        <radio-group bindchange="切换用户类型">
+          <radio value='学生' class="radioitem"  color="#16c3c9" checked >学生</radio>
+          <radio value='老师' class="radioitem"  color="#16c3c9" >老师</radio>
+        </radio-group>
+        <input name="UserType" value="{{UserType}}" hidden="{{true}}"/>
+      </view>
+      <view class='row'>
+        <input placeholder="{{PleaseInputYourUserName}}" name="USER_NAME" auto-focus value=''/>
+      </view>
+      <view class='row'>
+        <input placeholder="{{PleaseInputYourPassword}}" name="PASSWORD" type="{{IS_PASSWORD_TYPE}}" value=''/>
+      </view>
+      <view class='submit'>
+        <button form-type='submit' disabled="{{isFormSubmitButtonDisabled}}">
+          {{isFormSubmitButtonValue}}
+        </button>
+      </view>
+
+      <view class='automakeuser' bindtap="新生报名登记OPENURL" wx:if="{{SYSTEM_AUTO_MAKE_USER!='' && SYSTEM_AUTO_MAKE_USER!=undefined}}">
+        <button disabled="{{SYSTEM_AUTO_MAKE_USER_DISABLED}}">
+          {{SYSTEM_AUTO_MAKE_USER}}
+        </button>
+      </view>
+
+    </form>
+  </view> 
+
+  <view class='IcampusLoginCheck'>
+      <view class='text'>
+        <rich-text nodes="{{TextMemo}}" space="emsp"></rich-text>
+      </view>
+  </view>
+
+</view>

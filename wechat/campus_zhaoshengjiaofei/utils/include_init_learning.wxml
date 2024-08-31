@@ -1,0 +1,139 @@
+<!--新闻的列表显示,带有一个图片的预览-->
+<view class='container' style="{{IsShowBackGroundColor ? 'background:#EEE' : '' }}" wx:if="{{pageActionInit==true && pageActionInitNewsOrNotify=='在线课程'}}">
+  <view class='sjktab'>
+    <view class="son-nav">
+
+      <!--首部下拉部分菜单 -->
+      <view class="FilterArrayList" hidden="{{MobileEndShowGroupFilter!='Yes' ? true : false}}">
+        <block wx:for-items="{{menuTwo}}" wx:key="id" wx:for-index="menuIndex">
+          <view class="FilterArrayList-item{{menuTwo.length}}">
+            <view id="{{item.id}}" class="kl-item-hd {{item.open ? 'hd-show' : ''}}" bindtap="SelectMenuOneHeader">{{item.name}}
+              <image src="/images/on.png"></image>
+            </view>
+            <view class="kl-item-bd {{item.open ? 'bd-show' : ''}}">
+              <block wx:for-items="{{item.pages}}" wx:for-item="pages" wx:key="item">
+                <view class="navigator">
+                  <view class="navigator-text {{(pages.on||pages.on==1||pages.on=='1')?true:false}}" bindtap="SelectMenuOne" data-menuid="{{menuIndex}}" id="{{pages.id}}" data-pagename="{{pages.name}}" data-groupname="{{item.name}}">
+                    {{pages.id}} {{pages.name}}
+                    <image class="FilterArrayList-img" src="/images/dui.png"></image>
+                  </view>
+                </view>
+              </block>
+            </view>
+          </view>
+        </block>
+      </view>
+
+
+      <!--首部搜索部分菜单 -->
+      <view class="FilterArrayList" wx:if="{{MobileEndShowSearch=='Yes'}}">
+        <view style="width: 15%;float: left;position: relative;">
+          <view class="kl-item-hd search-show">
+            <view class="line"></view>
+            <text>{{menuSearch.name}}</text>
+          </view>
+        </view>
+        <view style="width: 25%;float: left;position: relative;">
+          <view class="kl-item-hd">
+            <picker name="{{menuSearch.name}}" mode="selector" value="{{menuSearch.value}}" data-name="{{menuSearch.name}}" data-id="{{menuSearch.id}}" id="{{menuSearch.id}}" range="{{menuSearch.range}}" data-range="{{menuSearch.range}}" bindchange="selectListHeaderMenuSearch">
+              {{menuSearch.chooseName}}
+            </picker>
+          </view>
+        </view>
+        <view style="width: 25%;float: left;position: relative;">
+          <view class="kl-item-hd">
+            <input type="text" placeholder="请输入搜索内容" style="height: 100%;" name="searchFieldValue" bindinput="bindKeywordInput" value="{{searchFieldValue}}" />
+          </view>
+        </view>
+        <view style="width: 15%;float: left;position: relative;">
+          <view class="kl-item-hd">
+            <view class="kl-item-hd" bindtap="searchFieldValueSearch">搜索</view>
+          </view>
+        </view>
+        <!--这个宽度为0的VIEW是必要的-->
+        <view style="width: 0%;float: left;position: relative;">
+          <view class="kl-item-hd">
+            <view class="kl-item-hd"></view>
+          </view>
+        </view>
+        <block wx:for-items="{{menuTwo}}" wx:key="id">
+          <view class="FilterArrayList-item{{menuTwoCount}}">
+            <view id="{{item.id}}" class="kl-item-hd {{item.open ? 'hd-show' : ''}}" bindtap="SelectMenuOneHeader">{{item.name}}
+              <image src="/images/on.png"></image>
+            </view>
+            <view class="kl-item-bd {{item.open ? 'bd-show' : ''}}">
+              <block wx:for-items="{{item.pages}}" wx:for-item="pages" wx:key="item">
+                <view class="navigator">
+                  <view class="navigator-text {{(pages.on||pages.on==1||pages.on=='1')?true:false}}" bindtap="SelectMenuOne" id="{{pages.id}}" data-groupname="{{item.name}}" data-pagename="{{pages.name}}">{{pages.id}} {{pages.name}}
+                    <image class="FilterArrayList-img" src="/images/dui.png"></image>
+                  </view>
+                </view>
+              </block>
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+  <view class='list-news'>
+    <scroll-view class="shangla" scroll-y="true" bindscrolltolower="searchScrollLower" style="height:{{(!searchLoading&&(!headerHiddenPriv||!searchHiddenPriv)) ? scrollHeight : scrollHeight}}px;">
+      <block wx:for="{{pageMainList}}" wx:key="pageMainListID" wx:for-item="item" wx:if="{{true}}">
+        <navigator url="/pages/Elearning/coursedetail?id={{item['微信小程序的新闻通知']['编号']}}" hover-class="none"  wx:if="{{item['微信小程序的新闻通知']!=undefined}}">
+          <view class='itemx'>
+            <view class='item'>
+              <view class='img'>
+                <image src="{{item['微信小程序的新闻通知']['缩略图片']}}" mode="aspectFill"></image>
+                <view class="nav" wx:if="{{item['微信小程序的新闻通知']['分类名称']!=''}}">{{item['微信小程序的新闻通知']['分类名称']}}</view>
+              </view>
+              <view class='con'>
+                <view class='title'>{{item['微信小程序的新闻通知']['课程名称']}}</view>
+                <view class='t-c'>
+                  <view><text style="padding-left:0;">{{item['微信小程序的新闻通知']['班级名称']}}</text></view>
+                  <view>
+                    <image src='/images/man.png'></image>
+                    <text>{{item['微信小程序的新闻通知']['教师']}}</text>
+                  </view>
+                </view>
+                <view class='t-d'>
+                  <view><text style="padding-left:0;">{{item['微信小程序的新闻通知']['学习比率']}}</text></view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </navigator>
+        <view class="IcampusListRow-item" wx:if="{{item['微信小程序的新闻通知']==undefined}}">
+          <view class="IcampusListRow-icon">
+            <image src="{{item['MobileEndIconImage']!==undefined?SYSTEM_URL+item['MobileEndIconImage']:'../../images/norecord.png'}}"></image>
+          </view>
+          <view class="IcampusListRow-content" wx:if="{{item['内容项URL']==undefined||item['内容项URL']==''}}">
+            <view class="IcampusListRow-title">{{item['MobileEndFirstLine']}}</view>
+            <view class="content-bottom">
+              <view class="quantity-status" style="background:{{item['MobileEndSecondLineLeft']!='' ? IcampusRowColor[item['MobileEndSecondLineRightColor']] : 'rgb(236, 49, 149)'}};">{{item['MobileEndSecondLineLeft']}}</view>
+              <view class="unapproved-quantity">{{item['MobileEndSecondLineRight']}}</view>
+            </view>
+          </view>
+        </view>
+      </block>
+
+      <!-- <view class="loading" hidden="{{!searchLoading}}">正在载入更多...</view> -->
+      <loading hidden="{{!searchLoading}}">正在加载</loading>
+      <block wx:if="{{pageCountTrip}}">
+        <view class="loadAllBox">
+          <view class="line"></view>
+          <view style="font-size:24rpx;">
+            <text class="{{IsShowBackGroundColor ? 'top' : 'topNoUnderline' }}" style="margin-right:10rpx;font-size:24rpx;color:#999;">{{pageCountTrip}}</text>
+            <text class="loading complete" hidden="{{!searchLoadingComplete}}">已加载全部</text>
+          </view>
+          <view class="line"></view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="loading complete loadAll" hidden="{{!searchLoadingComplete}}">
+          <view class="line"></view>
+          <text>已加载全部</text>
+          <view class="line"></view>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+</view>
