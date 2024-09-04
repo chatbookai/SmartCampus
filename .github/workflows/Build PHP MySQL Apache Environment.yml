@@ -23,7 +23,7 @@ jobs:
 
     - name: Install Apache
       run: |
-        choco install apache -y --version 2.4.56
+        choco install apache -y --version 2.4.3
         echo "Apache installed"
 
     - name: Install MySQL

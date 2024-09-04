@@ -1,5 +1,5 @@
 // ** React Imports
-import { useEffect, useCallback, useRef, useState, ChangeEvent } from 'react'
+import { useEffect, useCallback, useRef, useState, ChangeEvent, SyntheticEvent } from 'react'
 
 // ** Next Imports
 import Link from 'next/link'
@@ -345,7 +345,7 @@ const AutocompleteComponent = ({ hidden, settings }: Props) => {
                 id='appBar-search'
                 isOptionEqualToValue={() => true}
                 onInputChange={(event: any, value: string) => setSearchValue(value)}
-                onChange={(event: any, obj: AppBarSearchType) => handleOptionClick(obj as AppBarSearchType)}
+                onChange={(event: SyntheticEvent<Element, Event>, value: unknown) => handleOptionClick(value as AppBarSearchType)}
                 noOptionsText={<NoResult value={searchValue} setOpenDialog={setOpenDialog} />}
                 getOptionLabel={(option: AppBarSearchType | unknown) => (option as AppBarSearchType).title}
                 groupBy={(option: AppBarSearchType | unknown) =>
