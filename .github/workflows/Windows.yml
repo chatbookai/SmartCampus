@@ -1,0 +1,40 @@
+name: Smart Campus Windows
+
+on:
+  push:
+    branches:
+      - main  # 你可以修改为你的默认分支名称，例如 master
+
+jobs:
+  build:
+    runs-on: windows-2019  # 使用 Windows Server 2019 作为运行环境
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4  # 更新为使用 Node.js 20
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4  # 更新为使用 Node.js 20
+      with:
+        node-version: '20.x'  # 设置你的 Node.js 版本
+
+    - name: Set up GitHub Token
+      run: echo "GH_TOKEN=${{ secrets.GH_TOKEN }}" >> $GITHUB_ENV
+
+    - name: Set up MSBuild
+      uses: microsoft/setup-msbuild@v1
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: SmartCampus Windows
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: npm run build && next export --outdir webroot
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: SmartCampus Windows 0.0.1 - Windows.exe
+        path: dist/*.exe
+    
