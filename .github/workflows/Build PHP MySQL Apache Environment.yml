@@ -1,0 +1,65 @@
+name: Build PHP MySQL Apache Environment
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.2'
+
+    - name: Install Apache
+      run: |
+        choco install apache -y --version 2.4.56
+        echo "Apache installed"
+
+    - name: Install MySQL
+      run: |
+        choco install mysql -y --version 5.6
+        echo "MySQL installed"
+
+    - name: Create Installation Package
+      run: |
+        # Download and install Inno Setup
+        choco install innosetup -y
+        echo "Inno Setup installed"
+
+        # Create the installation script (example.iss)
+        echo "[Setup]" > example.iss
+        echo "AppName=MyApp" >> example.iss
+        echo "AppVersion=1.0" >> example.iss
+        echo "DefaultDirName=D:\\MYEDU" >> example.iss
+        echo "DefaultGroupName=MyApp" >> example.iss
+        echo "OutputDir=." >> example.iss
+        echo "OutputBaseFilename=setup" >> example.iss
+        echo "Compression=lzma" >> example.iss
+        echo "SolidCompression=yes" >> example.iss
+        echo "[Files]" >> example.iss
+        echo "Source: \"C:\\Program Files\\Apache Software Foundation\\Apache2.4\\*.*\"; DestDir: \"{app}\\APACHE\"; Flags: ignoreversion recursesubdirs createallsubdirs" >> example.iss
+        echo "Source: \"C:\\Program Files\\MySQL\\MySQL Server 5.6\\*.*\"; DestDir: \"{app}\\MYSQL\"; Flags: ignoreversion recursesubdirs createallsubdirs" >> example.iss
+        echo "Source: \"C:\\tools\\php82\\*.*\"; DestDir: \"{app}\\PHP\"; Flags: ignoreversion recursesubdirs createallsubdirs" >> example.iss
+        echo "[Run]" >> example.iss
+        echo "Filename: \"{app}\\APACHE\\bin\\httpd.exe\"; Parameters: \"-k install\"; Flags: runhidden" >> example.iss
+        echo "Filename: \"{app}\\MYSQL\\bin\\mysqld.exe\"; Parameters: \"--install\"; Flags: runhidden" >> example.iss
+
+        # Compile the installation script
+        "C:\\Program Files (x86)\\Inno Setup 6\\ISCC.exe" example.iss
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: setup
+        path: setup.exe
