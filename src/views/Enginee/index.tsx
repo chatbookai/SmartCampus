@@ -19,6 +19,11 @@ import ListItem from '@mui/material/ListItem'
 import CircularProgress from '@mui/material/CircularProgress'
 import CustomAvatar from 'src/@core/components/mui/avatar'
 
+import Table from '@mui/material/Table'
+import TableRow from '@mui/material/TableRow'
+import TableHead from '@mui/material/TableHead'
+import TableCell, { TableCellBaseProps } from '@mui/material/TableCell'
+
 import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
@@ -60,6 +65,14 @@ import ImagesPreview from './ImagesPreview'
 import IndexBottomFlowNode from './IndexBottomFlowNode'
 import { RootState, AppDispatch } from 'src/store/index'
 import { DecryptDataAES256GCM } from 'src/configs/functions'
+
+const MUITableCell = styled(TableCell)<TableCellBaseProps>(({ theme }) => ({
+  borderBottom: 0,
+  paddingLeft: '5 !important',
+  paddingRight: '5 !important',
+  paddingTop: `${theme.spacing(1)} !important`,
+  paddingBottom: `${theme.spacing(1)} !important`
+}))
 
 export type InvoiceLayoutProps = {
   backEndApi: string
@@ -354,8 +367,8 @@ const UserList = ({ backEndApi, externalId }: AddTableType) => {
             const scrollY = window.scrollY;
             const windowHeight = window.innerHeight;
             const documentHeight = document.body.scrollHeight;
-
-            if (scrollY + windowHeight >= documentHeight && isLoadingTipDisabled === false) {
+            
+            if (scrollY + windowHeight >= documentHeight && isLoadingTipDisabled === false && paginationModel.page < (pageCount-1)) {
                 setPaginationModel((paginationModel) => {
                     if (paginationModel.page < pageCount) {
                         const newPage = paginationModel.page + 1;
@@ -1150,6 +1163,21 @@ const UserList = ({ backEndApi, externalId }: AddTableType) => {
               }
               </Fragment>              
             }
+            {store.init_default.MobileSummary && store.init_default.MobileSummary.length > 0 && (
+              <Table sx={{mb: 3}}>
+                <TableHead>
+                    {store.init_default.MobileSummary.map((Item: any, Index: number) => {
+                      
+                      return (
+                        <TableRow key={Index}>
+                          <MUITableCell ><Typography variant='body2' sx={{ color: 'text.primary', display: 'flex', alignItems: 'center' }}>{Item.name}</Typography></MUITableCell>
+                          <MUITableCell ><Typography variant='body2' sx={{ color: 'text.primary', display: 'flex', alignItems: 'center' }}>{Item.value}</Typography></MUITableCell>
+                        </TableRow>
+                      )
+                    })}
+                </TableHead>
+              </Table>              
+            )}
             {store && store.init_default && store.init_default.rowdelete && store.init_default.rowdelete.map((Item: any, index: number) => {
               
               return (
@@ -1274,14 +1302,28 @@ const UserList = ({ backEndApi, externalId }: AddTableType) => {
                             FieldCountArray.map((FieldCount: number, FieldCountIndex: number)=>{
                               const FieldName = `MobileEndField${FieldCount}Name`
                               const FieldValue = `MobileEndField${FieldCount}Value`
+                              const FieldColspan = `MobileEndField${FieldCount}Colspan`
                               
                               return (
                                     <Fragment key={FieldCountIndex}>
-                                      {
-                                      item[FieldName] ? 
+                                      {item[FieldColspan] == '1' && (
+                                      <Fragment>
+                                        <Grid item xs={12}>
+                                          <Typography variant='body2' sx={{ fontWeight: 'bold', color: 'text.primary', display: 'flex', alignItems: 'center' }}>
+                                          {item[FieldName]}:
+                                          </Typography>
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                          <Typography variant='body2' sx={{ color: 'text.primary', display: 'flex', alignItems: 'left' }}>
+                                            {item[FieldValue]}
+                                          </Typography>
+                                        </Grid>
+                                      </Fragment>
+                                      )}
+                                      {item[FieldColspan] == '2' && (
                                       <Fragment>
                                         <Grid item xs={4}>
-                                          <Typography variant='body2' sx={{ color: 'text.primary', display: 'flex', alignItems: 'center' }}>
+                                          <Typography variant='body2' sx={{ fontWeight: 'bold', color: 'text.primary', display: 'flex', alignItems: 'center' }}>
                                           {item[FieldName]}:
                                           </Typography>
                                         </Grid>
@@ -1291,13 +1333,18 @@ const UserList = ({ backEndApi, externalId }: AddTableType) => {
                                           </Typography>
                                         </Grid>
                                       </Fragment>
-                                      :
-                                      null
-                                      }                          
+                                      )}
                                     </Fragment>
                               )
                             }) 
                           }
+                          {store.init_default.MobileEndFieldGlobalButtonText && store.init_default.MobileEndFieldGlobalButtonAction && (
+                            <Fragment>
+                              <Grid item xs={12} container justifyContent="center" alignItems="center">
+                                <Button sx={{ mb: 2 }} disabled={store.init_default.MobileEndFieldGlobalButtonDisabled == "Disabled" ? true : false} variant='outlined' size='small' onClick={() => { window.history.back(); }}>{store.init_default.MobileEndFieldGlobalButtonText}</Button>
+                              </Grid>
+                            </Fragment>
+                          )}
                         </Grid>
 
                       </CardContent>      
