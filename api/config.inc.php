@@ -27,6 +27,7 @@ $FileCacheDir           = "D:/MYEDU/Attach/FileCache";
 //Setting JWT
 $NEXT_PUBLIC_JWT_EXPIRATION = 300;
 
+
 //Setting NEXT_PUBLIC_JWT_SECRET value, need to change other value once you online your site.
 $NEXT_PUBLIC_JWT_SECRET = 'kFNRSI6Ilx1NWI2Nlx1Ox1NjUzNlx1NTNkMVx1OTBhZVx';
 

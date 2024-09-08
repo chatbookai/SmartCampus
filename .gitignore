@@ -8,7 +8,7 @@
 # PHP library
 /cache
 /api/cache
-/api/config.inc.php
+api/config.inc.php
 
 
 # testing
