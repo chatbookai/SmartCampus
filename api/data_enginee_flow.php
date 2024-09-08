@@ -2576,38 +2576,47 @@ foreach ($rs_a as $Line) {
     if($SettingMap['MobileEndField1']!=""&&$SettingMap['MobileEndField1']!="Disable")  {
         $MobileEndItem['MobileEndField1Name']   = $SettingMap['MobileEndField1'];
         $MobileEndItem['MobileEndField1Value']   = $Line[$SettingMap['MobileEndField1']];
+        $MobileEndItem['MobileEndField1Colspan']   = 2;
     }
     if($SettingMap['MobileEndField2']!=""&&$SettingMap['MobileEndField2']!="Disable")  {
         $MobileEndItem['MobileEndField2Name']   = $SettingMap['MobileEndField2'];
         $MobileEndItem['MobileEndField2Value']   = $Line[$SettingMap['MobileEndField2']];
+        $MobileEndItem['MobileEndField2Colspan']   = 2;
     }
     if($SettingMap['MobileEndField3']!=""&&$SettingMap['MobileEndField3']!="Disable")  {
         $MobileEndItem['MobileEndField3Name']   = $SettingMap['MobileEndField3'];
         $MobileEndItem['MobileEndField3Value']   = $Line[$SettingMap['MobileEndField3']];
+        $MobileEndItem['MobileEndField3Colspan']   = 2;
     }
     if($SettingMap['MobileEndField4']!=""&&$SettingMap['MobileEndField4']!="Disable")  {
         $MobileEndItem['MobileEndField4Name']   = $SettingMap['MobileEndField4'];
         $MobileEndItem['MobileEndField4Value']   = $Line[$SettingMap['MobileEndField4']];
+        $MobileEndItem['MobileEndField4Colspan']   = 2;
     }
     if($SettingMap['MobileEndField5']!=""&&$SettingMap['MobileEndField5']!="Disable")  {
         $MobileEndItem['MobileEndField5Name']   = $SettingMap['MobileEndField5'];
         $MobileEndItem['MobileEndField5Value']   = $Line[$SettingMap['MobileEndField5']];
+        $MobileEndItem['MobileEndField5Colspan']   = 2;
     }
     if($SettingMap['MobileEndField6']!=""&&$SettingMap['MobileEndField6']!="Disable")  {
         $MobileEndItem['MobileEndField6Name']   = $SettingMap['MobileEndField6'];
         $MobileEndItem['MobileEndField6Value']   = $Line[$SettingMap['MobileEndField6']];
+        $MobileEndItem['MobileEndField6Colspan']   = 2;
     }
     if($SettingMap['MobileEndField7']!=""&&$SettingMap['MobileEndField7']!="Disable")  {
         $MobileEndItem['MobileEndField7Name']   = $SettingMap['MobileEndField7'];
         $MobileEndItem['MobileEndField7Value']   = $Line[$SettingMap['MobileEndField7']];
+        $MobileEndItem['MobileEndField7Colspan']   = 2;
     }
     if($SettingMap['MobileEndField8']!=""&&$SettingMap['MobileEndField8']!="Disable")  {
         $MobileEndItem['MobileEndField8Name']   = $SettingMap['MobileEndField8'];
         $MobileEndItem['MobileEndField8Value']   = $Line[$SettingMap['MobileEndField8']];
+        $MobileEndItem['MobileEndField8Colspan']   = 2;
     }
     if($SettingMap['MobileEndField9']!=""&&$SettingMap['MobileEndField9']!="Disable")  {
         $MobileEndItem['MobileEndField9Name']   = $SettingMap['MobileEndField9'];
         $MobileEndItem['MobileEndField9Value']   = $Line[$SettingMap['MobileEndField9']];
+        $MobileEndItem['MobileEndField9Colspan']   = 2;
     }
 
     //LimitEditAndDelete

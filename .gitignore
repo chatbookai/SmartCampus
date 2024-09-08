@@ -8,6 +8,8 @@
 # PHP library
 /cache
 /api/cache
+/api/config.inc.php
+
 
 # testing
 /coverage
