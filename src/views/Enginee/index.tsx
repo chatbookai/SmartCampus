@@ -122,6 +122,7 @@ const UserList = ({ backEndApi, externalId }: AddTableType) => {
   const [imagesType, setImagesType] = useState<string[]>([])
   const [CSRF_TOKEN, setCSRF_TOKEN] = useState<string>('')
   const [CSRF_TOKEN_MAP, setCSRF_TOKEN_MAP] = useState<any>({})
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   const [filterMultiColumns, setFilterMultiColumns] = useState<GridFilterModel>()
   const [searchFieldName, setSearchFieldName] = useState<string>('')
@@ -1338,10 +1339,26 @@ const UserList = ({ backEndApi, externalId }: AddTableType) => {
                               )
                             }) 
                           }
-                          {store.init_default.MobileEndFieldGlobalButtonText && store.init_default.MobileEndFieldGlobalButtonAction && (
+                          {item['MobileEndFieldGlobalButtonText'] && item['MobileEndFieldGlobalButtonAction'] && storedToken && (
                             <Fragment>
                               <Grid item xs={12} container justifyContent="center" alignItems="center">
-                                <Button sx={{ mb: 2 }} disabled={store.init_default.MobileEndFieldGlobalButtonDisabled == "Disabled" ? true : false} variant='outlined' size='small' onClick={() => { window.history.back(); }}>{store.init_default.MobileEndFieldGlobalButtonText}</Button>
+                                <Button sx={{ mb: 2 }} disabled={item['MobileEndFieldGlobalButtonDisabled'] == "Disabled" ? true : false || isButtonDisabled} variant='outlined' size='small' onClick={() => {
+                                    setIsButtonDisabled(true)
+                                    axios.post(authConfig.backEndApiHost + backEndApi + item['MobileEndFieldGlobalButtonAction'], {Id: item['MobileEndFieldId']}, { headers: { Authorization: storedToken, 'Content-Type': 'application/json'} })
+                                    .then(async (res: any) => {
+                                      if(res.data.status == "OK")   {
+                                        toast.success(res.data.msg)
+                                        setForceUpdate(Math.random())
+                                        setIsButtonDisabled(false)
+                                      }
+                                      if(res.data.status == "ERROR")   {
+                                        toast.error(res.data.msg)
+                                        setForceUpdate(Math.random())
+                                        setIsButtonDisabled(false)
+                                      }
+                                      console.log("responseresponse", res)
+                                    })
+                                 }}>{item['MobileEndFieldGlobalButtonText']}</Button>
                               </Grid>
                             </Fragment>
                           )}
