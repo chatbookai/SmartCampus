@@ -25,7 +25,7 @@ else if(hostname == 'dc.gdgxjx.cn')   {
   indexDashboardPath = "/dashboards/analytics"
   indexMenuspath = "auth/menus.php"
 }
-else if(hostname == 'localhost')   {
+else if(hostname == 'localhost' || hostname == '127.0.0.1')   {
   APP_URL = "http://localhost/api/"
   themeNameTemp = "单点科技"
   indexDashboardPath = "/dashboards/analytics"
